@@ -2,11 +2,11 @@
 MSAN 622 Information Visualization
 ==================================
 
-|  **Name:** | Sophie Engle           |
+|  **Name:** | Jason Shu           |
 |-----------:|:-----------------------|
-| **Email:** | <sjengle@cs.usfca.edu> |
-|   **Web:** | <http://msan622.github.io/spring-2015-msan622> |
+| **Email:** | <jwshu2@dons.usfca.edu> |
+|   **Web:** | <http://shubags.github.io/Visualizations> |
 
 ## About Me ##
 
-TEST
+I am me...
