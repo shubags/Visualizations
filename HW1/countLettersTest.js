@@ -1,4 +1,3 @@
-
 var searchTerms = decodeURI(window.location.search)
 var letters = new Object()
 
@@ -25,7 +24,7 @@ var yPadding = 25;
 var xPadding = 40;
 var numTicks = 5;
 var scaleRange = maxVal;
-var format = 'relative'
+var format = 'absolute'
 var sumLetters = 0
 var sortBy = 'frequency'
 var letterNames = []
@@ -179,3 +178,35 @@ svg.append("g")
             "stroke" : "black",
             "stroke-width" : "1px"
         });
+
+        d3.select("input").on("change", change);
+
+var sortTimeout = setTimeout(function() {
+  d3.select("input").property("checked", true).each(change);
+}, 2000);
+
+function change() {
+  clearTimeout(sortTimeout);
+
+  // Copy-on-write since tweens are evaluated after a delay.
+  var x0 = x.domain(data.sort(this.checked
+      ? function(a, b) { return b.frequency - a.frequency; }
+      : function(a, b) { return d3.ascending(a.letter, b.letter); })
+      .map(function(d) { return d.letter; }))
+      .copy();
+
+  svg.selectAll(".bar")
+      .sort(function(a, b) { return x0(a.letter) - x0(b.letter); });
+
+  var transition = svg.transition().duration(750),
+      delay = function(d, i) { return i * 50; };
+
+  transition.selectAll(".bar")
+      .delay(delay)
+      .attr("x", function(d) { return x0(d.letter); });
+
+  transition.select(".x.axis")
+      .call(xAxis)
+    .selectAll("g")
+      .delay(delay);
+}
