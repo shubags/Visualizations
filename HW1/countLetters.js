@@ -27,7 +27,7 @@ var numTicks = 5;
 var scaleRange = maxVal;
 var format = 'relative'
 var sumLetters = 0
-var sortBy = 'frequency'
+var sortBy = 'alphabetical'
 var letterNames = []
 
 function compare(a,b) {
@@ -138,19 +138,6 @@ svg.selectAll("rect")
    .on('mouseout', tip.hide) 
    ;
 
-// Add labels to bar chart
-// svg.selectAll("text")
-//    .data(dataset)
-//    .enter()
-//    .append("text")
-//    .text(function(d) {return d.value.toFixed(decimals);})
-//    .attr("x", function(d) {return xScale(d.key) + xScale.rangeBand() / 2;})
-//    .attr("y", function(d) {return yScale(d.value) + 15;})
-//    .attr("fill", "white")
-//    .attr("font-family", "Arial")
-//    .attr("font-size", "16px")
-//    .attr("text-anchor", "middle")
-//    ;
 
 svg.append("g")
    .attr("class", "axis")
@@ -190,3 +177,35 @@ svg.append("g")
             "stroke" : "black",
             "stroke-width" : "1px"
         });
+
+  d3.select("input").on("change", change);
+
+  var sortTimeout = setTimeout(function() {
+    d3.select("input").property("checked", true).each(change);
+  }, 2000);
+
+  function change() {
+    clearTimeout(sortTimeout);
+
+    // Copy-on-write since tweens are evaluated after a delay.
+    var x0 = xScale.domain(dataset.sort(this.checked
+        ? function(a, b) { return b.value - a.value; }
+        : function(a, b) { return d3.ascending(a.key, b.key); })
+        .map(function(d) { return d.key; }))
+        .copy();
+
+    svg.selectAll(".bar")
+        .sort(function(a, b) { return x0(a.key) - x0(b.key); });
+
+    var transition = svg.transition().duration(750),
+        delay = function(d, i) { return i * 50; };
+
+    transition.selectAll("rect")
+        .delay(delay)
+        .attr("x", function(d) { return x0(d.key); });
+
+    transition.select(".x.axis")
+        .call(xAxis)
+      .selectAll("g")
+        .delay(delay);
+  }

@@ -29,6 +29,10 @@
         font-size: 16px;
     }
 
+    .x.axis path {
+        display: none;
+    }
+
    .d3-tip {
       line-height: 1;
       font-weight: bold;
@@ -57,6 +61,11 @@
       top: 100%;
       left: 0;
     }
+
+    label {
+        position: relative;
+        }
+
 </style>
 
 
@@ -77,8 +86,6 @@
 <!-- STUDENTS: Remove this after verifying D3 is working. //-->
 <!-- <script src="js/testD3.js"></script> -->
 <!-- <script>testD3("demo");</script> -->
-
-
 
 <!-- Fixed Navbar -->
 <nav class="navbar navbar-inverse navbar-fixed-top">
@@ -119,6 +126,9 @@
     </div>
 </div>
 
+<div style="margin-left: 30px; height: 20px">
+<label><input type="checkbox"> Sort values by frequency</label>
+</div>
 
 <script src="countLetters.js"></script>
 
@@ -190,8 +200,9 @@
                 <h4> Moderate functionality (B-Level) </h3>
                     <ul>
                         <li> Tool tip feature was added to create pop-up box of bar height on hover-over. </li>
-<!--                     <li> xxx </li>
-                        <li> xxx </li> -->
+                    <li> A button was added to allow sorting alphabetically or 
+                         by frequency </li>
+<!--                         <li> xxx </li> -->
                     </ul>
 
                 <h4> Design decisions </h4>
