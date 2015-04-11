@@ -25,7 +25,7 @@ var yPadding = 25;
 var xPadding = 40;
 var numTicks = 5;
 var scaleRange = maxVal;
-var format = 'absolute'
+var format = 'relative'
 var sumLetters = 0
 var sortBy = 'frequency'
 var letterNames = []
@@ -92,21 +92,12 @@ var mag = (h - yPadding) / maxVal;
 //Create SVG element
 document.body.innerHTML += '<div class="div.myDiv"></div>';
 
-var tip = d3.tip()
-  .attr('class', 'd3-tip')
-  .offset([-10, 0])
-  .html(function(d) {
-    return "<strong>Frequency:</strong> <span style='color:red'>" + d.frequency + "</span>";
-  })
-
 
 var svg = d3.select("body")
             .append("svg")
             .attr("width", w)
             .attr("height", h)
             ;
-
-svg.call(tip);
 
 var xScale = d3.scale.ordinal()
                   .domain(letterNames)

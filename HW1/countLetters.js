@@ -92,12 +92,21 @@ var mag = (h - yPadding) / maxVal;
 //Create SVG element
 document.body.innerHTML += '<div class="div.myDiv"></div>';
 
+var tip = d3.tip()
+  .attr('class', 'd3-tip')
+  .offset([-10, 0])
+  .html(function(d) {
+    return "<strong>Frequency:</strong> <span style='color:red'>" + d.value + "</span>";
+  })
+
 
 var svg = d3.select("body")
             .append("svg")
             .attr("width", w)
             .attr("height", h)
             ;
+
+svg.call(tip);
 
 var xScale = d3.scale.ordinal()
                   .domain(letterNames)
@@ -125,21 +134,23 @@ svg.selectAll("rect")
    .attr("width", xScale.rangeBand())
    .attr("height", function(d){return yScale(0) - yScale(d.value);})
    .attr("fill", "blue")
+   .on('mouseover', tip.show)
+   .on('mouseout', tip.hide) 
    ;
 
 // Add labels to bar chart
-svg.selectAll("text")
-   .data(dataset)
-   .enter()
-   .append("text")
-   .text(function(d) {return d.value.toFixed(decimals);})
-   .attr("x", function(d) {return xScale(d.key) + xScale.rangeBand() / 2;})
-   .attr("y", function(d) {return yScale(d.value) + 15;})
-   .attr("fill", "white")
-   .attr("font-family", "Arial")
-   .attr("font-size", "16px")
-   .attr("text-anchor", "middle")
-   ;
+// svg.selectAll("text")
+//    .data(dataset)
+//    .enter()
+//    .append("text")
+//    .text(function(d) {return d.value.toFixed(decimals);})
+//    .attr("x", function(d) {return xScale(d.key) + xScale.rangeBand() / 2;})
+//    .attr("y", function(d) {return yScale(d.value) + 15;})
+//    .attr("fill", "white")
+//    .attr("font-family", "Arial")
+//    .attr("font-size", "16px")
+//    .attr("text-anchor", "middle")
+//    ;
 
 svg.append("g")
    .attr("class", "axis")
