@@ -150,13 +150,13 @@
                         </ul>
                     <li>Made SVG width and height a function of the window size so that it always fits</li>
                 </ul>
-            <h4> Moderate functionality (B-Level) </h3>
+<!--             <h4> Moderate functionality (B-Level) </h3>
                 <ul>
                     <li> xxx </li>
                     <li> xxx </li>
                     <li> xxx </li>
                 </ul>
-            </div>
+ -->            </div>
         </div>
     <!-- </div> -->
 
@@ -164,21 +164,15 @@
         <!-- <h2 class="page-header"> d</h2> -->
 
             <div class="media-body">
-                <h4> Advanced functionality (A-Level) </h3>
-                    <ul>
-                        <li> xxx </li>
-                        <li> xxx </li>
-                        <li> xxx </li>
-                    </ul>
                 <h4> Design decisions </h4>
                     <p>
-                        Paragraph 1
+                        The design decisions of this chart can be broken down into two primary categories: aesthetics and data representation. These factors were meant to improve the understandability of the data.
                     </p>
                     <p>
-                        Paragraph 2
+                        From an data representation perspective, I chose to sort the data by order of frequency (from left to right). This style plot gives users the quickest visual understanding of the most frequently represented letters. It also helps users quickly see how many letters it takes to describe most of the data (e.g. the Pareto principal). 
                     </p>
                     <p>
-                        Paragraph 3
+                        From an aesthetics perspective, I chose a bright blue bar because it is easy to see, and it is the color that is least frequently associated with affected by color blindness. I elected to place the text representing the actual frequency of the letters onto the bars themselves. This is a bit of double encoding, but I wanted users to be able to see what the levels were at in the event that many unique letters and numbers were used. At 26 letters and 10 digits, the bar chart could have 36 elements, making it hard to track the data all of the way to the y-axis. I chose the numbers to be inside of the bars (rather than on top of the bars) because, in the event I added grid lines, I did not want the two elements getting too cluttered.
                     </p>
             </div>
     </div>
