@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
-<title>Jason Shu's Awesome MSAN 622 Information Visualization</title>
+<title>Jason Shu's Homework 1 Submittal</title>
 
 <link href="css/bootstrap.min.css" rel="stylesheet">
 <link href="css/bootstrap-theme.min.css" rel="stylesheet">
@@ -16,7 +16,21 @@
         padding-top: 50px;
         padding-bottom: 20px;
     }
+
+    .axis path,
+    .axis line {
+        fill: none;
+        stroke: black;
+        shape-rendering: crispEdges;
+    }
+
+    .axis text {
+        font-family: sans-serif;
+        font-size: 16px;
+    }
+
 </style>
+
 
 <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
 <!--[if lt IE 9]>
@@ -26,6 +40,16 @@
 </head>
 
 <body>
+<script src="http://d3js.org/d3.v3.min.js"></script>
+<script src="js/jquery.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<!-- <script src="js/d3.min.js"></script> -->
+
+<!-- STUDENTS: Remove this after verifying D3 is working. //-->
+<!-- <script src="js/testD3.js"></script> -->
+<!-- <script>testD3("demo");</script> -->
+
+
 
 <!-- Fixed Navbar -->
 <nav class="navbar navbar-inverse navbar-fixed-top">
@@ -55,66 +79,28 @@
     </div>
 </nav>
 
-<div class="jumbotron">
+<!-- <div class="jumbotron"> -->
+<div style="background-color: #eee">
     <div class="container">
-        <h1>Information Visualization</h1>
+        <h1 style="font-size: 32px">Homework 1</h1>
 
-        <p>Welcome to my submission website for <a href="#">MSAN 622 Information Visualization</a> at the <a href="http://www.usfca.edu/">University of San Francisco</a>.</p>
+        <p style="font-size: 20px">Sortable Characters</a>.</p>
 
-        <p><a class="btn btn-primary btn-lg" href="#about" role="button">About Me &raquo;</a></p>
     </div>
 </div>
-
+<script src="countLetters.js"></script>
 <div class="container">
 
-<p style="text-align: center;">
-    <svg id="demo" height="20" width="300"></svg>
-</p>
-
 <div class="row">
-    <div class="col-md-4">
-        <h2 class="page-header"><a name="homework"></a>Homework</h2>
 
-        <ul>
-            <li><a href="https://shubags.github.io/index.html">Homework 1</a></li>
-            <li>Homework 2</li>
-            <li>Homework 3</li>
-            <li>Homework 4</li>
-            <li>Homework 5</li>
-        </ul>
-    </div>
 
-    <div class="col-md-4">
-        <h2 class="page-header"><a name="project"></a>Project</h2>
+<!-- INSERT STUFF HERE!!! -->
 
-        <ul>
-            <li>Project Dataset</li>
-            <li>Project Sketch</li>
-            <li>Project Prototype</li>
-            <li>Project Video</li>
-            <li>Project Report</li>
-        </ul>
-    </div>
-
-    <div class="col-md-4">
-        <h2 class="page-header"><a name="participation"></a>Participation</h2>
-
-        <ul>
-            <li>Pending</li>
-        </ul>
-    </div>
 </div>
 
 <div class="row">
-    <div class="col-md-8">
-        <h2 class="page-header"><a name="about"></a>About Me</h2>
-
-        <div class="media">
-            <div class="media-left">
-                <a href="#">
-                    <img class="media-object" src="img/profile.jpg" style="width: 150px; height: 150px;">
-                </a>
-            </div>
+    <div class="col-md-6">
+        <h2 class="page-header"><a name="about"></a>Summary</h2>
 
             <div class="media-body">
                 <p>I am currently the Senior Analytics Manager at <a href="http://www.womply.com">Womply</a>, a 
@@ -138,36 +124,34 @@
                 </p>
             </div>
         </div>
+    <!-- </div> -->
+
+    <div class="col-md-6">
+        <h2 class="page-header"><a name="about"></a>Summary</h2>
+
+            <div class="media-body">
+                <p>I am currently the Senior Analytics Manager at <a href="http://www.womply.com">Womply</a>, a 
+                    San Francisco-based analytics company. We are focused on providing small- and medium-
+                    sized businesses with insights to help optimize their decision-making.</p>
+                <p>I am a lifelong student, focused on a rounding out a diverse skillset. My degrees include:
+                    <ul>
+                        <li> <strong>M.S. Analytics</strong> - University of San Francisco</li>
+                        <li> <strong>MBA</strong> - Georgetown University</li>
+                        <li> <strong>M.S. Systems Engineering</strong> - University of Southern California</li>
+                        <li> <strong>B.S. Mechanical Engineering</strong> - University of Illinois</li>
+                    </ul>
+                </p>
+                <p>Prior to joining Womply, I spent 13 years at The Boeing Company in a variety of roles, including:
+                    <ul>
+                        <li> Country Manager, International Strategic Partnerships</li>
+                        <li> Principal, Corporate Strategy</li>
+                        <li> Corporate Auditor</li>
+                        <li> Operations Analyst / Systems Engineer</li>
+                    </ul>
+                </p>
+            </div>
     </div>
 
-    <div class="col-md-4">
-        <h2 class="page-header"><a name="contact"></a>Contact</h2>
-
-        <table class="table table-bordered" style="width: auto;">
-            <thead>
-                <tr>
-                    <th colspan="2">Jason Shu</th>
-                </tr>
-            </thead>
-
-            <tbody>
-                <tr>
-                    <th>Github:</th>
-                    <td><a href="https://github.com/shubags/Visualizations"> Jason's Visualizations Github Repository</a></td>
-                </tr>
-                <tr>
-                    <th>Linkedin:</th>
-                    <td><a href="http://www.linkedin.com/in/jasonwshu/en">www.linkedin.com/in/jasonwshu/en</a></td>
-                </tr>
-
-                <tr>
-                    <th>Email:</th>
-                    <td><a href="mailto:jason.w.shu@gmail.com">jason.w.shu@gmail.com</a></td>
-                </tr>
-
-            </tbody>
-        </table>
-    </div>
 </div>
 
 <hr/>
@@ -178,12 +162,5 @@
 
 </div><!--/.container -->
 
-<script src="js/jquery.min.js"></script>
-<script src="js/bootstrap.min.js"></script>
-<script src="js/d3.min.js"></script>
-
-<!-- STUDENTS: Remove this after verifying D3 is working. //-->
-<script src="js/testD3.js"></script>
-<script>testD3("demo");</script>
 </body>
 </html>
