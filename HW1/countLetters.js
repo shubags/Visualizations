@@ -90,6 +90,9 @@ var h = window.innerHeight * .6;
 var mag = (h - yPadding) / maxVal;
 
 //Create SVG element
+document.body.innerHTML += '<div class="div.myDiv"></div>';
+
+
 var svg = d3.select("body")
             .append("svg")
             .attr("width", w)
