@@ -21,13 +21,15 @@ function compare(a,b) {
 
   dataset = dataset.sort(compare);
 
-  var minX = +d3.min(dataset, function(d){return d.illiteracy;})
-  var maxX = +d3.max(dataset, function(d){return d.illiteracy;})
-  var minY = +d3.min(dataset, function(d){return d.grad;})
-  var maxY = +d3.max(dataset, function(d){return d.grad;})
-  var minR = +d3.min(dataset, function(d){return d.murder;})
-  var maxR = +d3.max(dataset, function(d){return d.murder;})
+  var minX = d3.min(dataset, function(d){return +d.illiteracy;})
+  var maxX = d3.max(dataset, function(d){return +d.illiteracy;})
+  var minY = d3.min(dataset, function(d){return +d.grad;})
+  var maxY = d3.max(dataset, function(d){return +d.grad;})
+  var minR = d3.min(dataset, function(d){return +d.murder;})
+  var maxR = d3.max(dataset, function(d){return +d.murder;})
 
+  console.log(minR)
+  console.log(maxR)
 
   var tip = d3.tip()
     .attr('class', 'd3-tip')
@@ -57,24 +59,27 @@ function compare(a,b) {
                     .range([xPadding, w - xPadding])
                     ;
 
-  console.log(xScale(dataset[6].illiteracy));
-
   var yScale = d3.scale.linear()
                     .domain([minY - (minY % 5), maxY + 5 - (maxY % 5)])
                     .range([h - yPadding, yPadding])
                     ;
 
   var rScale = d3.scale.sqrt()
-                  .domain([minR,maxR])
-                  .range([1, Math.pow(h, 0.5)])
+                  .domain([0,maxR])
+                  .range([1, Math.pow(h, 0.55)])
                   ;
-  
+
   var categories = dataset.map(function(d) {return d.region;});
-  var unique = categories.filter(function(item, i, ar)
+  var uniqueCat = categories.filter(function(item, i, ar)
                     { return ar.indexOf(item) === i; });
   
   var cScale = d3.scale.category10()
-                  .domain(unique)
+                  .domain(uniqueCat)
+
+  var regionCol = uniqueCat.map(function(d){return {
+                      "region": d,
+                      "color": cScale(d)};
+                    })
 
   var xAxis = d3.svg.axis()
                     .scale(xScale)
@@ -89,7 +94,7 @@ function compare(a,b) {
      .style("text-anchor", "middle")
      .style("font-size", "24px")
      .style("font-weight", "bold")
-     .text("Western States Smarter But Not Necessarily Safer")
+     .text("Southern States Lagging in Education and Safety")
 
   svg.selectAll("circle")
      .data(dataset)
@@ -141,4 +146,61 @@ function compare(a,b) {
       .selectAll("line.horizontalGrid")
       .data(yScale.ticks(numTicks)).enter()
       ;
+
+  var legendCirc = svg.append("g")
+      .attr("class", "legend")
+      .attr("transform", "translate(" + (w - 50) + "," + (h / 3) + ")")
+      .selectAll("g")
+      .data([5, 10, 20])
+      .enter().append("g")
+      ;
+  legendCirc.append("text")
+      .attr("y", 0)
+      .attr("dy", -70)
+      .text("Murders per 100,000")
+
+  legendCirc.append("circle")
+      .attr("cy", function(d) { return -rScale(d); })
+      .attr("r", rScale)
+      .style("stroke", "black")
+      ;
+
+  legendCirc.append("text")
+      .attr("y", function(d) { return -2 * rScale(d); })
+      .attr("dy", "1.3em")
+      .text(d3.format(".1s"))
+      ;
+
+  var legendCol = svg.append("g")
+        .attr("class", "legend")
+        .attr("transform", "translate(" + (w - 50) + "," + (h*3 / 7) + ")")
+        .selectAll("g")
+        .data(regionCol)
+        .enter().append("g")
+        ;
+    legendCol.append("text")
+        .attr("y", 0)
+        .attr("dy", 0)
+        .text("Region")
+
+    legendCol.append("rect")
+        .attr("y", function(d, i) {return 15 + i * 30; })
+        .attr("x", -40)
+        .attr("width", 80)
+        .attr("height", 20)
+        .attr("fill", function(d){return d.color})
+        .style("opacity", .5)
+        ;
+
+    legendCol.append("text")
+        .attr("y", function(d, i) {return 30 + i * 30; })
+        .attr("x", 0)
+        .attr("text-anchor", "middle")
+        .text(function(d){return d.region;})
+        .style("fill", "black")
+        .style("font-weight", "bold")
+        ;
+
+
 });
+

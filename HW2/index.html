@@ -66,8 +66,19 @@
         position: relative;
         }
 
-    #myPlot.svg{
+    div svg{
         margin: 0 auto;
+    }
+
+    .legend circle {
+      fill: none;
+      stroke: #ccc;
+    }
+
+    .legend text {
+      fill: #777;
+      font: 10px sans-serif;
+      text-anchor: middle;
     }
 
 </style>
@@ -120,7 +131,7 @@
 </div>
 
 <div id="myPlot" style="display: block; margin: auto;"></div>
-
+<script src="legend.js"></script>
 <script src="makeBubbles.js"></script>
 
 
