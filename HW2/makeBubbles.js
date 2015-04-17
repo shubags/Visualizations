@@ -117,12 +117,9 @@ function compare(a,b) {
      .append("text")
      .attr("x", (w - 2 * xPadding) / 2 + xPadding)
      .attr("y", yPadding * .8)
-     // .attr("y", h /2 )
      .style("text-anchor", "middle")
      .style("font-size", "18px")
-     .text("Illiteracy Rate")
-     // .selectAll("line.horizontalGrid")
-     // .data(yScale.ticks(numTicks)).enter()
+     .text("Illiteracy Rate (%)")
      ;
 
   var yAxis = d3.svg.axis()
@@ -142,7 +139,7 @@ function compare(a,b) {
       .attr("y", -50)
       .style("text-anchor", "middle")
       .style("font-size", "18px")
-      .text("High School Graduation Rate")
+      .text("High School Graduation Rate (%)")
       .selectAll("line.horizontalGrid")
       .data(yScale.ticks(numTicks)).enter()
       ;
@@ -200,7 +197,5 @@ function compare(a,b) {
         .style("fill", "black")
         .style("font-weight", "bold")
         ;
-
-
 });
 

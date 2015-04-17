@@ -154,9 +154,8 @@
         <div class="media-body">
             <p>The purpose of this assignment was to:
                 <ul>
-                    <li> Gain basic familiarity with HTML and CSS to create webpages</li>
-                    <li> Begin exploring the capabilities of JavaScript to build webpage functionality</li>
-                    <li> Learn the basic capabilities of D3 and the process for building D3 objects for visualizations</li>
+                    <li> Practice display of multi-variate data</li>
+                    <li> Exploring the capabilities of d3 and small-multiple plots</li>
                 </ul>
             </p>
             <p>Functionality was built in phases to successively build on features. The following phases of
@@ -164,30 +163,11 @@
             </p>
             <h4> Basic functionality (C-Level) </h3>
                 <ul>
-                    <li>Decoded URI Search term</li>
-                    <li>Kept only alpha-numeric characters</li>
-                    <li>Logged js object with lettercount in console</li>
-                    <li>Built styled bars using D3 in an SVG</li>
-                    <li>Added text annotation to SVG barsto indicate frequency of letter occurance</li>
-                    <li>Ordered bars in alphabetical order (with numbers before letters)</li>
-                    <li>Added fixed number of tick marks (5) to Y-axis with absolute frequencies and no decimals</li>
+                    <li>Loaded data from externally processed .csv file</li>
+                    <li>Built scatter plot with graduation and illiteracy rates</li>
+                    <li>Modified radius to scatter plot circles based on murder rate</li>
+                    <li>Modified color of the scatter plot based on the region that the state was in</li>
                 </ul>
-            <h4> Basic+ functionality (new C-level)</h4>
-            <ul>
-                <li>Changed bar order to be sorted by frequency (highest to lowest) instead of alphabetical</li>
-                <li>Made graph adjustable to show relative frequencies instead of absolute frequencies</li>
-                    <ul>
-                        <li>Bar data labels change to relative frequency</li>
-                        <li>Y-axis labels switch to 2 decimals instead of whole numbers</li>
-                        <li>Bar labels switch to 2 decimals instead of whole numbers</li>
-                    </ul>
-                <li>Made the number of Y-axis ticks dynamic to adjust for the following conditional:</li>
-                    <ul>
-                        <li>If max frequency is less than 10, then number of ticks is the number of max frequency</li>
-                        <li>If max frequency is less than 10, then the number of ticks as close to 10 as possible without exceeding where the tick delta is a whole number</li>
-                        <li>If the chart type is relative instead of absolute, it sets the tick number at 5
-                    </ul>
-                <li>Made SVG width and height a function of the window size so that it always fits</li>
             </ul>
         </div>
     </div>
