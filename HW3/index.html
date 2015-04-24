@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<title>Jason Shu's Homework 2 Submittal</title>
+
+<link href="css/bootstrap.min.css" rel="stylesheet">
+<link href="css/bootstrap-theme.min.css" rel="stylesheet">
+
+<style type="text/css">
+    body {
+        padding-top: 50px;
+        padding-bottom: 20px;
+    }
+
+    .axis path,
+    .axis line {
+        fill: none;
+        stroke: black;
+        shape-rendering: crispEdges;
+    }
+
+    .axis text {
+        font-family: sans-serif;
+        font-size: 16px;
+    }
+
+   .d3-tip {
+      line-height: 1;
+      font-weight: bold;
+      padding: 12px;
+      background: rgba(0, 0, 0, 0.8);
+      color: #fff;
+      border-radius: 2px;
+    }
+
+    /* Creates a small triangle extender for the tooltip */
+    .d3-tip:after {
+      box-sizing: border-box;
+      display: inline;
+      font-size: 10px;
+      width: 100%;
+      line-height: 1;
+      color: rgba(0, 0, 0, 0.8);
+      content: "\25BC";
+      position: absolute;
+      text-align: center;
+    }
+
+    /* Style northward tooltips differently */
+    .d3-tip.n:after {
+      margin: -1px 0 0 0;
+      top: 100%;
+      left: 0;
+    }
+
+    label {
+        position: relative;
+        }
+
+    div svg{
+        margin: 0 auto;
+    }
+
+
+    .legend text {
+      fill: #777;
+      font: 10px sans-serif;
+      text-anchor: middle;
+    }
+
+    .frame {
+      fill: none;
+      stroke: #aaa;
+    }
+
+    .axis,
+    .frame {
+      shape-rendering: crispEdges;
+    }
+
+    .axis path,
+    .axis line {
+      fill: none;
+      stroke: #000;
+      shape-rendering: crispEdges;
+    }
+
+    .x.axis path {
+      display: none;
+    }
+
+    .line {
+      fill: none;
+      stroke: steelblue;
+      stroke-width: 1.5px;
+    }
+
+</style>
+
+</head>
+
+<body>
+<script src="d3.v3.min.js"></script>
+<script src="js/jquery.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script src="d3.tip.v0.6.3.js"></script>
+
+<!-- Fixed Navbar -->
+<nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                <span class="sr-only">Toggle Navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#">MSN 622</a>
+        </div>
+
+        <div id="navbar" class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
+                <li><a href="#homework">Homework</a></li>
+                <li><a href="#project">Project</a></li>
+                <li><a href="#participation">Participation</a></li>
+            </ul>
+
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="#about">About</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </div><!--/.nav-collapse -->
+    </div>
+</nav>
+
+<!-- <div class="jumbotron"> -->
+<div style="background-color: #eee">
+    <div class="container">
+        <h1 style="font-size: 32px">Jason Shu's Homework 3</h1>
+
+        <h3 style="font-size: 20px">Time Series Visualizations</h3>
+        <p style="font-size: 14px">Click <a href="https://github.com/shubags/Visualizations/tree/gh-pages/HW3">here</a> for source code</p>
+
+    </div>
+</div>
+
+<div id="myPlot1" style="display: block; margin: auto;"></div>
+<script src="../makeBubbles.js"></script>
+<!-- <script src="multipleLineTimeSeries.js"></script> -->
+
+<div style="height: 50px;"></div>   
+
+
+<div id="myPlot2" style="display: block; top-margin: 20px; margin: auto;"></div>
+<script src="../makeBubbles.js"></script>
+
+
+<div class="container">
+<div class="row">
+
+<!-- ADD BUTTONS AND STUFF HERE -->
+
+</div>
+
+<div class="row">
+    <div class="col-md-12">
+        <h2 class="page-header">Project Description</h2>
+    </div>
+</div>
+
+
+<div class="row">
+    <div class="col-md-6">
+        <div class="media-body">
+            <p>The purpose of this assignment was to:
+                <ul>
+                    <li> Practice display of multi-variate data</li>
+                    <li> Exploring the capabilities of d3 and small-multiple plots</li>
+                </ul>
+            </p>
+            <p>Functionality was built in phases to successively build on features. The following phases of
+                describe the features added.
+            </p>
+            <h4> Basic functionality (C-Level) </h3>
+                <ul>
+                    <li>Loaded data from externally processed .csv file</li>
+                    <li>Built scatter plot with graduation and illiteracy rates</li>
+                    <li>Modified radius to scatter plot circles based on murder rate</li>
+                    <li>Modified color of the scatter plot based on the region that the state was in</li>
+                </ul>
+<!--             <h4> Moderate functionality (B-Level) </h3>
+            <ul>
+                <li> Tool tip feature was added to create pop-up box of bar height on hover-over. </li>
+                <li> A button was added to allow sorting alphabetically or 
+                 by frequency </li>
+            </ul>
+ -->
+
+            </ul>
+        </div>
+    </div>
+
+    <div class="col-md-6">
+        <div class="media-body">
+            <h4> Design decisions </h4>
+            <p>
+                The design decisions of this chart can be broken down into two primary categories: aesthetics and data representation. These factors were meant to improve the understandability of the data.
+            </p>
+            <p>
+                From an data representation perspective, I first wanted the easiest relationship to be seen to be the linear relationship between high school graduation rate and illiteracy. After this, I wanted to couple the education level with the notion of safety. I used bubble size in order to represent this. Lastly, I wanted to show how states in certain regions were clustered for these three factors, which I represented with the colors.
+            </p>
+            <p>
+                From an aesthetics perspective, I allowed d3 to select the best four colors for my regions. I added some opacity to improve the ability to see overlapping circles. Despite the presence of axes and labels, I added a tool tip feature so that could easily see all of the exact values of a state by hovering. This is a form of double encoding, but it was meant to help users who find it difficult to measure the area of the bubbles.
+            </p>
+        </div>
+    </div>
+
+</div>
+
+<hr/>
+
+<footer>
+    <p style="text-align: center;">Jason Shu &bullet; MSAN 622 Information Visualization &bullet; Spring 2015</p>
+</footer>
+
+</div><!--/.container -->
+
+</body>
+</html>
