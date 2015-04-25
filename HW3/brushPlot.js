@@ -1,12 +1,12 @@
+function plot3(){
 
-
-var margin = {top: 10, right: 10, bottom: 100, left: 40},
-    margin2 = {top: 430, right: 10, bottom: 20, left: 40},
+var margin = {top: 80, right: 10, bottom: 100, left: 80},
+    margin2 = {top: 430, right: 10, bottom: 20, left: 80},
     width = 960 - margin.left - margin.right,
     height = 500 - margin.top - margin.bottom,
     height2 = 500 - margin2.top - margin2.bottom;
 
-var parseDate = d3.time.format("%b %Y").parse;
+var parseDate = d3.time.format("%Y-%m-%d").parse;
 
 var x = d3.time.scale().range([0, width]),
     x2 = d3.time.scale().range([0, width]),
@@ -25,17 +25,20 @@ var area = d3.svg.area()
     .interpolate("monotone")
     .x(function(d) { return x(d.date); })
     .y0(height)
-    .y1(function(d) { return y(d.price); });
+    .y1(function(d) { return y(d.deathRate); });
 
 var area2 = d3.svg.area()
     .interpolate("monotone")
     .x(function(d) { return x2(d.date); })
     .y0(height2)
-    .y1(function(d) { return y2(d.price); });
+    .y1(function(d) { return y2(d.deathRate); });
 
-var svg = d3.select("body").append("svg")
+var svg = d3.select("#myPlot3").append("svg")
     .attr("width", width + margin.left + margin.right)
-    .attr("height", height + margin.top + margin.bottom);
+    .attr("height", height + margin.top + margin.bottom)
+    .attr("display", "block") 
+    .attr("left-margin", "auto")
+    .attr("right-margin", "auto");
 
 svg.append("defs").append("clipPath")
     .attr("id", "clip")
@@ -51,11 +54,14 @@ var context = svg.append("g")
     .attr("class", "context")
     .attr("transform", "translate(" + margin2.left + "," + margin2.top + ")");
 
-d3.csv("sp500.csv", type, function(error, data) {
+d3.csv("deathRate.csv", type, function(error, data) {
   x.domain(d3.extent(data.map(function(d) { return d.date; })));
-  y.domain([0, d3.max(data.map(function(d) { return d.price; }))]);
+  y.domain([0, d3.max(data.map(function(d) { return d.deathRate; }))]);
   x2.domain(x.domain());
   y2.domain(y.domain());
+
+  console.log(x.domain())
+  console.log(x2.domain())
 
   focus.append("path")
       .datum(data)
@@ -69,7 +75,14 @@ d3.csv("sp500.csv", type, function(error, data) {
 
   focus.append("g")
       .attr("class", "y axis")
-      .call(yAxis);
+      .call(yAxis)
+      .append("text")
+      .attr("transform", "rotate(-90)")
+      .attr("y", -50)
+      .attr("dy", ".71em")
+      .attr("x", -40)
+      .style("text-anchor", "end")
+      .text("Drivers Killed Per Million KM Driven");
 
   context.append("path")
       .datum(data)
@@ -97,6 +110,8 @@ function brushed() {
 
 function type(d) {
   d.date = parseDate(d.date);
-  d.price = +d.price;
+  d.deathRate = +d.deathRate;
   return d;
 }
+}
+plot3()
