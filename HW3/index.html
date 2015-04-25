@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
-<title>Jason Shu's Homework 2 Submittal</title>
+<title>Jason Shu's Homework 3 Submittal</title>
 
 <link href="css/bootstrap.min.css" rel="stylesheet">
 <link href="css/bootstrap-theme.min.css" rel="stylesheet">
@@ -17,17 +17,11 @@
         padding-bottom: 20px;
     }
 
-    .axis path,
-    .axis line {
-        fill: none;
-        stroke: black;
-        shape-rendering: crispEdges;
-    }
-
     .axis text {
         font-family: sans-serif;
         font-size: 16px;
     }
+
 
    .d3-tip {
       line-height: 1;
@@ -67,12 +61,12 @@
     }
 
 
-    .legend text {
+/*    .legend text {
       fill: #777;
       font: 10px sans-serif;
       text-anchor: middle;
     }
-
+*/
     .frame {
       fill: none;
       stroke: #aaa;
@@ -90,10 +84,10 @@
       shape-rendering: crispEdges;
     }
 
-    .x.axis path {
+/*    .x.axis path {
       display: none;
     }
-
+*/
     .line {
       fill: none;
       stroke: steelblue;
@@ -149,15 +143,19 @@
     </div>
 </div>
 
+
+
 <div id="myPlot1" style="display: block; margin: auto;"></div>
-<script src="../makeBubbles.js"></script>
-<!-- <script src="multipleLineTimeSeries.js"></script> -->
+<script src="multipleLineTimeSeries.js"></script>
 
-<div style="height: 50px;"></div>   
+<!-- <div style="height: 10px;"></div>    -->
 
 
-<div id="myPlot2" style="display: block; top-margin: 20px; margin: auto;"></div>
-<script src="../makeBubbles2.js"></script>
+<div id="myPlot2" style="display: block; margin: auto;"></div>
+<script src="stackedArea.js"></script>
+
+<div style="height: 25px;"></div>   
+
 
 
 <div class="container">
@@ -179,8 +177,8 @@
         <div class="media-body">
             <p>The purpose of this assignment was to:
                 <ul>
-                    <li> Practice display of multi-variate data</li>
-                    <li> Exploring the capabilities of d3 and small-multiple plots</li>
+                    <li> Practice display of time-series data</li>
+                    <!-- <li> Exploring the capabilities of d3 and small-multiple plots</li> -->
                 </ul>
             </p>
             <p>Functionality was built in phases to successively build on features. The following phases of
@@ -189,9 +187,10 @@
             <h4> Basic functionality (C-Level) </h3>
                 <ul>
                     <li>Loaded data from externally processed .csv file</li>
-                    <li>Built scatter plot with graduation and illiteracy rates</li>
-                    <li>Modified radius to scatter plot circles based on murder rate</li>
-                    <li>Modified color of the scatter plot based on the region that the state was in</li>
+                    <li>Drew individual line charts for the total deaths and serious injuries based on the seat that the individual was sitting in in the car</li>
+                    <li>Added text to the end of the lines to indicate which data set the line was associated with</li>
+                    <li>Drew stacked area charts for the total deaths and serious injuries based on the seat that the individual was sitting in in the car</li>
+                    <li>Drew color box legend to indicate which data that the area chart represented </li>
                 </ul>
 <!--             <h4> Moderate functionality (B-Level) </h3>
             <ul>
@@ -212,10 +211,10 @@
                 The design decisions of this chart can be broken down into two primary categories: aesthetics and data representation. These factors were meant to improve the understandability of the data.
             </p>
             <p>
-                From an data representation perspective, I first wanted the easiest relationship to be seen to be the linear relationship between high school graduation rate and illiteracy. After this, I wanted to couple the education level with the notion of safety. I used bubble size in order to represent this. Lastly, I wanted to show how states in certain regions were clustered for these three factors, which I represented with the colors.
+                From an data representation perspective, I first wanted to clearly show the magnitude difference that each seat had with respect to deaths and serious injuries. I also wanted the reader to see how the injuries and deaths followed similar patterns with respect to time, irrespective of where in the car the individual was sitting. This was accomplished by the multiple-line chart. In order to show the overall total of injuries and deaths, I created the stacked area chart. Granularity was added to show the proportion of deaths/injuries that were suffered from each car seat location.
             </p>
             <p>
-                From an aesthetics perspective, I allowed d3 to select the best four colors for my regions. I added some opacity to improve the ability to see overlapping circles. Despite the presence of axes and labels, I added a tool tip feature so that could easily see all of the exact values of a state by hovering. This is a form of double encoding, but it was meant to help users who find it difficult to measure the area of the bubbles.
+                From an aesthetics perspective, I allowed d3 to select the best three colors for the car seat locations.
             </p>
         </div>
     </div>
