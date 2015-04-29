@@ -69,8 +69,6 @@
     </div>
 </div>
 
-<div style="margin-left: 30px; height: 60px"></div>
-
 <div class="container">
 <div class="row">
 
@@ -78,28 +76,38 @@
 
 <div class="row">
     <div class="col-md-12">
-        <h2 class="page-header">Project Data Set Description and Motivation</h2>
+        <h2 class="page-header">Project Planning</h2>
     </div>
 </div>
-
 
 <div class="row">
     <div class="col-md-6">
         <!-- <h2 class="page-header"><a name="about"></a>Summary</h2> -->
 
             <div class="media-body">
-                <h4> The data... </h4>
-                <p>SIPRI is the Stockholm International Peace Research Institute is the preeminent source for military spending by countries over time. The data source is frequently cited by governments and used by organizations to identify trends in the defense industry. SIPRI's site can be found <a href="http://www.sipri.org/research/armaments/milex/milex_database/milex_database">here</a>.
-                <p> Permission to use the data for public consumption is typically required. However, there are a few exceptions, including the use of the data for use in a university/school/college paper, essay or dissertation. This includes producing graphs and charts based on the data. That being said, since I will be posting the results of the project online, I have requested permission nevertheless.</p>
+                <h4> Planned Tools </h4>
+                <p>In addition to D3, I plan to use R to do my data preprocessing and analysis. </p>
+                <p>Because I plan to use an animated time series, I plan to use certain techniques in R to impute missing values. Depending on the complexity, I will simply impute the data using basic linear interpolation in R. </p>
 
-                <p> The data includes several perspective, but the most prevalent information for my needs is the military expenditures for:
+                <h4> Planned Techniques </h4>
+                <p>I plan to start with an animated bar chart of total defense spending per country. The x-value will be country, the y-value will be US Dollars spent on defense, and the color will be the continent on which the country comes from.</p>
+                <p>I will then build an area plot that shows a parallel coordinates plot that includes: the following axes: 
                     <ul>
-                        <li> NATO countries: data is available for the past 65 years</li>
-                        <li> Non-NATO countries: data is available for the past 26 years</li>
+                        <li>Total defense spending during the entire period between the starting date and ending date</li>
+                        <li>Total spending on social entitlement programs during the same period of time</li>
+                        <li>Cumulative Average Growth Rate (CAGR) of spending on defense</li>
+                        <li>Cumulative Average Growth Rate (CAGR) of spending on social programs</li>
                     </ul>
                 </p>
-                <p> This numerical data is shown in terms of U.S. dollars, local currency, and as a percentage of GDP.
+                <p>I plan on using an animated bubble plot, similar to the one that is used in the famous Health and Wealth visualization. For this plot, I will use four dimensions of data:
+                    <ul>
+                        <li>X-value: Debt as a percentage of GDP</li>
+                        <li>Y-value: Defense spending as a percentage of GDP</li>
+                        <li>Bubble radius: GDP of country</li>
+                        <li>Bubble color: Continent that the country resides</li>
+                    </ul>
                 </p>
+
             </div>
         </div>
     <!-- </div> -->
@@ -108,10 +116,15 @@
         <!-- <h2 class="page-header"> d</h2> -->
 
             <div class="media-body">
-                <h4> The motivation </h4>
-                    <p> I spent many years focused on analyzing the global defense industry. I would like to create a visualization of some of the data I did analysis on by never really visualized. I have linked the defense spending, by country, by year, but I intend to combine this with GDP growth data from the IMF. There are interesting trends about how certain countries have increased spending as a percentage of GDP while others have significantly decreased spending. I am also interested in the trends as they pertain to growth in manufacturing (data which is often available through the OECD).
-                    </p>
+                <h4> Planned Interaction </h4>
+                <p>The bar chart will allow users to select the year that they wish to see spending and the bars will re-build and re-order based on the year. </p>
+                <p>The paralell coordinates plot will allow the user to highlight the line of the country of interest so they can easily see the shape of the line of each country of interest. </p>
+                <p>The final visualization will be animated by year, and users will be allowed to see what the situation looked like during any given year by moving their mouse over the slider area. </p>
 
+                <h4> Planned Interface</h4>
+                <p>Blah blah blah. </p>
+                <p>Blah blah blah. </p>
+            </div>
 
             </div>
     </div>
