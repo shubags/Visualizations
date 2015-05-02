@@ -167,7 +167,7 @@
         <div class="media-body">
             <p>The purpose of this assignment was to:
                 <ul>
-                    <li> Practice display of time-series data</li>
+                    <li> Practice the creation of a dashboard to understand data</li>
                     <!-- <li> Exploring the capabilities of d3 and small-multiple plots</li> -->
                 </ul>
             </p>
@@ -176,16 +176,18 @@
             </p>
             <h4> Basic functionality (C-Level) </h3>
                 <ul>
-                    <li>Loaded data from externally processed .csv file</li>
-                    <li>Drew individual line charts for the total deaths and serious injuries based on the seat that the individual was sitting in in the car</li>
-                    <li>Added text to the end of the lines to indicate which data set the line was associated with</li>
-                    <li>Drew stacked area charts for the total deaths and serious injuries based on the seat that the individual was sitting in in the car</li>
-                    <li>Drew color box legend to indicate which data that the area chart represented </li>
+                    <li>Data manipulation: I subsetted data to exclude data with no values for:</li>
+                      <ul>
+                          <li>Movies with no budget data</li>
+                          <li>Movies with no MPAA rating</li>
+                      </ul>
+
+                    <li>Aligned area chart and bar chart to visualize that the money spent on producing movies was increasing while the amount spent per movie had decreased. </li>
                 </ul>
-            <h4> Moderate functionality (B-Level) </h3>
+<!--             <h4> Moderate functionality (B-Level) </h3>
             <ul>
                 <li> Added brushing to a third plot that allows focus and context for a more specific measurement of driving death rates. </li>
-<!--                 <li> A button was added to allow sorting alphabetically or 
+ --><!--                 <li> A button was added to allow sorting alphabetically or 
                  by frequency </li> -->
             </ul>
 
@@ -198,13 +200,10 @@
         <div class="media-body">
             <h4> Design decisions </h4>
             <p>
-                The design decisions of this chart can be broken down into two primary categories: aesthetics and data representation. These factors were meant to improve the understandability of the data.
+                As mentioned earlier, I wanted to ensure that the data of the bar chart and the area chart were aligned. I also wanted to distinguish between the genres of movies to show the relative amount that was spent on each type. I chose not to show the number of movies that were created for each genre because I felt this to be another level of detail that was too much for the casual viewer to comprehend.
             </p>
             <p>
-                From an data representation perspective, I first wanted to clearly show the magnitude difference that each seat had with respect to deaths and serious injuries. I also wanted the reader to see how the injuries and deaths followed similar patterns with respect to time, irrespective of where in the car the individual was sitting. This was accomplished by the multiple-line chart. In order to show the overall total of injuries and deaths, I created the stacked area chart. Granularity was added to show the proportion of deaths/injuries that were suffered from each car seat location.
-            </p>
-            <p>
-                From an aesthetics perspective, I allowed d3 to select the best three colors for the car seat locations.
+                I put the box plot in the dashboard because I thought it was interesting to see the difference between the distribution of viewer ratings for the different MPAA ratings for movies.
             </p>
         </div>
     </div>
