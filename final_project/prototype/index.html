@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
-<title>Jason Shu's Homework 4 Submittal</title>
+<title>Jason Shu's Visualization Final Project</title>
 
 <link href="css/bootstrap.min.css" rel="stylesheet">
 <link href="css/bootstrap-theme.min.css" rel="stylesheet">
@@ -109,6 +109,7 @@
 <script src="js/jquery.min.js"></script>
 <script src="js/bootstrap.min.js"></script>
 <script src="d3.tip.v0.6.3.js"></script>
+<script src="/js/colorbrewer.js"></script>
 
 <!-- Fixed Navbar -->
 <nav class="navbar navbar-inverse navbar-fixed-top">
@@ -141,23 +142,42 @@
 <!-- <div class="jumbotron"> -->
 <div style="background-color: #eee">
     <div class="container">
-        <h1 style="font-size: 32px">Jason Shu's Homework 4</h1>
+        <h1 style="font-size: 32px">Jason Shu's Final Project</h1>
 
-        <h3 style="font-size: 20px">Dashboard</h3>
-        <p style="font-size: 14px">Click <a href="https://github.com/shubags/Visualizations/tree/gh-pages/HW4">here</a> for source code</p>
+        <h3 style="font-size: 20px">Visualization Prototype</h3>
+        <p style="font-size: 14px">Click <a href="https://github.com/shubags/Visualizations/tree/gh-pages/final_project/prototype">here</a> for source code</p>
 
     </div>
 </div>
 
-<script type='text/javascript' src='https://public.tableau.com/javascripts/api/viz_v1.js'></script>
 
-<div class='tableauPlaceholder' style='width: 982px; height: 742px;display: block; margin-left: auto; margin-right: auto;'><noscript><a href='#'><img alt='Dashboard 1 ' src='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;MH&#47;MH5FMRPP7&#47;1_rss.png' style='border: none' /></a></noscript><object class='tableauViz' width='982' height='742' style='display:none;'><param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' /> <param name='path' value='shared&#47;MH5FMRPP7' /> <param name='toolbar' value='yes' /><param name='static_image' value='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;MH&#47;MH5FMRPP7&#47;1.png' /> <param name='animate_transition' value='yes' /><param name='display_static_image' value='yes' /><param name='display_spinner' value='yes' /><param name='display_overlay' value='yes' /><param name='display_count' value='yes' /><param name='showVizHome' value='no' /><param name='showTabs' value='y' /><param name='bootstrapWhenNotified' value='true' /></object></div>
+
+<!-- <div id="myPlot1" style="display: block; margin: auto;"></div>
+<script src="multipleLineTimeSeries.js"></script>
+ -->
+<!-- <div style="height: 10px;"></div>    -->
+
+
+<!-- <div id="myPlot2" style="display: block; margin: auto;"></div>
+<script src="stackedArea.js"></script>
+
+<div style="height: 25px;"></div>   
+ -->
+<div id="myPlot3" style="display: block; margin-left: auto; margin-right: auto;"></div>
+<script src="brushPlot.js"></script>
+
+<div style="height: 25px;"></div>   
+
+<div class="container">
+<div class="row">
+
+<!-- ADD BUTTONS AND STUFF HERE -->
 
 </div>
 
 <div class="row">
     <div class="col-md-12">
-        <h2 class="page-header">Project Description</h2>
+        <h2 class="page-header">Description</h2>
     </div>
 </div>
 
@@ -165,45 +185,37 @@
 <div class="row">
     <div class="col-md-6">
         <div class="media-body">
-            <p>The purpose of this assignment was to:
+          <h4>Dataset Description</h4>
+
+            <p>SIPRI is the Stockholm International Peace Research Institute is the preeminent source for military spending by countries over time. The data source is frequently cited by governments and used by organizations to identify trends in the defense industry. SIPRI's site can be found <a href="http://www.sipri.org/research/armaments/milex/milex_database/milex_database">here</a>.
+
+            <p> The data includes several perspective, but the most prevalent information for my needs is the military expenditures for:
                 <ul>
-                    <li> Practice the creation of a dashboard to understand data</li>
-                    <!-- <li> Exploring the capabilities of d3 and small-multiple plots</li> -->
+                    <li> NATO countries: data is available for the past 65 years</li>
+                    <li> Non-NATO countries: data is available for the past 26 years</li>
                 </ul>
             </p>
-            <p>Functionality was built in phases to successively build on features. The following phases of
-                describe the features added.
-            </p>
-            <h4> Basic functionality (C-Level) </h3>
-                <ul>
-                    <li>Data manipulation: I subsetted data to exclude data with no values for:</li>
-                      <ul>
-                          <li>Movies with no budget data</li>
-                          <li>Movies with no MPAA rating</li>
-                      </ul>
+            <p> This numerical data is shown in terms of constant FY11 U.S. dollars. Future visualizations will incorporate spending as a percentage of GDP.</p>
 
-                    <li>Aligned area chart and bar chart to visualize that the money spent on producing movies was increasing while the amount spent per movie had decreased. </li>
-                </ul>
-<!--             <h4> Moderate functionality (B-Level) </h3>
-            <ul>
-                <li> Added brushing to a third plot that allows focus and context for a more specific measurement of driving death rates. </li>
- --><!--                 <li> A button was added to allow sorting alphabetically or 
-                 by frequency </li> -->
-            </ul>
+            <p> A full description of the dataset can be found <a href='https://shubags.github.io/Visualizations/ProjectDataSet/index.html'>
+              here</a>. </p>
 
-
-            </ul>
         </div>
     </div>
 
     <div class="col-md-6">
         <div class="media-body">
-            <h4> Design decisions </h4>
+            <h4> Sketch Summary </h4>
             <p>
-                As mentioned earlier, I wanted to ensure that the data of the bar chart and the area chart were aligned. I also wanted to distinguish between the genres of movies to show the relative amount that was spent on each type. I chose not to show the number of movies that were created for each genre because I felt this to be another level of detail that was too much for the casual viewer to comprehend.
+                This sketch is an implementation of a brushed area chart in d3. The stacked areas represent the spending by each NATO country since the organization's inception in 1949. The purpose of this chart is to show how the United States has spent the lion's share on defense over this entire period. This is somewhat misleading in that the U.S. also has the largest GDP compared to other NATO countries (typically by an order of magnitude).
             </p>
             <p>
-                I put the box plot in the dashboard because I thought it was interesting to see the difference between the distribution of viewer ratings for the different MPAA ratings for movies.
+                Because there are so many countries, I did not include a legend. Instead, I am in the process of implementing a tooltip that will allow the user to see what the defense spending was in any given year. This feature is still in work. I also allowed for brushing so that users could focus on a certain period of time.
+            </p>
+            <p>
+              There is a lie factor that I am looking to address since many NATO countries joined during the 65 years after the organization's inception. Therefore, growth isn't just a function of increased spending, but also the inclusion of more countries' budgets in the total.
+
+              I hope to resolve this by allowing the tooltip to show countries that were added each year when the user hovers over the whitespace above the area chart.
             </p>
         </div>
     </div>

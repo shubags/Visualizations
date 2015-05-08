@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
-<title>Jason Shu's Homework 4 Submittal</title>
+<title>Jason Shu's Homework 3 Submittal</title>
 
 <link href="css/bootstrap.min.css" rel="stylesheet">
 <link href="css/bootstrap-theme.min.css" rel="stylesheet">
@@ -109,6 +109,7 @@
 <script src="js/jquery.min.js"></script>
 <script src="js/bootstrap.min.js"></script>
 <script src="d3.tip.v0.6.3.js"></script>
+<script src="/js/colorbrewer.js"></script>
 
 <!-- Fixed Navbar -->
 <nav class="navbar navbar-inverse navbar-fixed-top">
@@ -141,17 +142,36 @@
 <!-- <div class="jumbotron"> -->
 <div style="background-color: #eee">
     <div class="container">
-        <h1 style="font-size: 32px">Jason Shu's Homework 4</h1>
+        <h1 style="font-size: 32px">Jason Shu's Final Project</h1>
 
-        <h3 style="font-size: 20px">Dashboard</h3>
-        <p style="font-size: 14px">Click <a href="https://github.com/shubags/Visualizations/tree/gh-pages/HW4">here</a> for source code</p>
+        <h3 style="font-size: 20px">Visualization Prototype</h3>
+        <p style="font-size: 14px">Click <a href="https://github.com/shubags/Visualizations/tree/gh-pages/HW3">here</a> for source code</p>
 
     </div>
 </div>
 
-<script type='text/javascript' src='https://public.tableau.com/javascripts/api/viz_v1.js'></script>
 
-<div class='tableauPlaceholder' style='width: 982px; height: 742px;display: block; margin-left: auto; margin-right: auto;'><noscript><a href='#'><img alt='Dashboard 1 ' src='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;MH&#47;MH5FMRPP7&#47;1_rss.png' style='border: none' /></a></noscript><object class='tableauViz' width='982' height='742' style='display:none;'><param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' /> <param name='path' value='shared&#47;MH5FMRPP7' /> <param name='toolbar' value='yes' /><param name='static_image' value='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;MH&#47;MH5FMRPP7&#47;1.png' /> <param name='animate_transition' value='yes' /><param name='display_static_image' value='yes' /><param name='display_spinner' value='yes' /><param name='display_overlay' value='yes' /><param name='display_count' value='yes' /><param name='showVizHome' value='no' /><param name='showTabs' value='y' /><param name='bootstrapWhenNotified' value='true' /></object></div>
+
+<!-- <div id="myPlot1" style="display: block; margin: auto;"></div>
+<script src="multipleLineTimeSeries.js"></script>
+ -->
+<!-- <div style="height: 10px;"></div>    -->
+
+
+<!-- <div id="myPlot2" style="display: block; margin: auto;"></div>
+<script src="stackedArea.js"></script>
+
+<div style="height: 25px;"></div>   
+ -->
+<div id="myPlot3" style="display: block; margin: auto;"></div>
+<script src="brushPlot.js"></script>
+
+<div style="height: 25px;"></div>   
+
+<div class="container">
+<div class="row">
+
+<!-- ADD BUTTONS AND STUFF HERE -->
 
 </div>
 
@@ -167,7 +187,7 @@
         <div class="media-body">
             <p>The purpose of this assignment was to:
                 <ul>
-                    <li> Practice the creation of a dashboard to understand data</li>
+                    <li> Practice display of time-series data</li>
                     <!-- <li> Exploring the capabilities of d3 and small-multiple plots</li> -->
                 </ul>
             </p>
@@ -176,18 +196,16 @@
             </p>
             <h4> Basic functionality (C-Level) </h3>
                 <ul>
-                    <li>Data manipulation: I subsetted data to exclude data with no values for:</li>
-                      <ul>
-                          <li>Movies with no budget data</li>
-                          <li>Movies with no MPAA rating</li>
-                      </ul>
-
-                    <li>Aligned area chart and bar chart to visualize that the money spent on producing movies was increasing while the amount spent per movie had decreased. </li>
+                    <li>Loaded data from externally processed .csv file</li>
+                    <li>Drew individual line charts for the total deaths and serious injuries based on the seat that the individual was sitting in in the car</li>
+                    <li>Added text to the end of the lines to indicate which data set the line was associated with</li>
+                    <li>Drew stacked area charts for the total deaths and serious injuries based on the seat that the individual was sitting in in the car</li>
+                    <li>Drew color box legend to indicate which data that the area chart represented </li>
                 </ul>
-<!--             <h4> Moderate functionality (B-Level) </h3>
+            <h4> Moderate functionality (B-Level) </h3>
             <ul>
                 <li> Added brushing to a third plot that allows focus and context for a more specific measurement of driving death rates. </li>
- --><!--                 <li> A button was added to allow sorting alphabetically or 
+<!--                 <li> A button was added to allow sorting alphabetically or 
                  by frequency </li> -->
             </ul>
 
@@ -200,10 +218,13 @@
         <div class="media-body">
             <h4> Design decisions </h4>
             <p>
-                As mentioned earlier, I wanted to ensure that the data of the bar chart and the area chart were aligned. I also wanted to distinguish between the genres of movies to show the relative amount that was spent on each type. I chose not to show the number of movies that were created for each genre because I felt this to be another level of detail that was too much for the casual viewer to comprehend.
+                The design decisions of this chart can be broken down into two primary categories: aesthetics and data representation. These factors were meant to improve the understandability of the data.
             </p>
             <p>
-                I put the box plot in the dashboard because I thought it was interesting to see the difference between the distribution of viewer ratings for the different MPAA ratings for movies.
+                From an data representation perspective, I first wanted to clearly show the magnitude difference that each seat had with respect to deaths and serious injuries. I also wanted the reader to see how the injuries and deaths followed similar patterns with respect to time, irrespective of where in the car the individual was sitting. This was accomplished by the multiple-line chart. In order to show the overall total of injuries and deaths, I created the stacked area chart. Granularity was added to show the proportion of deaths/injuries that were suffered from each car seat location.
+            </p>
+            <p>
+                From an aesthetics perspective, I allowed d3 to select the best three colors for the car seat locations.
             </p>
         </div>
     </div>
