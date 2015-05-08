@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<title>Jason Shu's Homework 5 Submittal</title>
+
+<link href="css/bootstrap.min.css" rel="stylesheet">
+<link href="css/bootstrap-theme.min.css" rel="stylesheet">
+
+<style type="text/css">
+    body {
+        padding-top: 60px;
+        padding-bottom: 20px;
+    }
+
+    .axis text {
+        font-family: sans-serif;
+        font-size: 16px;
+    }
+
+    .brush .extent {
+      stroke: #fff;
+      fill-opacity: .125;
+      shape-rendering: crispEdges;
+    }
+
+
+   .d3-tip {
+      line-height: 1;
+      font-weight: bold;
+      padding: 12px;
+      background: rgba(0, 0, 0, 0.8);
+      color: #fff;
+      border-radius: 2px;
+    }
+
+    /* Creates a small triangle extender for the tooltip */
+    .d3-tip:after {
+      box-sizing: border-box;
+      display: inline;
+      font-size: 10px;
+      width: 100%;
+      line-height: 1;
+      color: rgba(0, 0, 0, 0.8);
+      content: "\25BC";
+      position: absolute;
+      text-align: center;
+    }
+
+    /* Style northward tooltips differently */
+    .d3-tip.n:after {
+      margin: -1px 0 0 0;
+      top: 100%;
+      left: 0;
+    }
+
+    label {
+        position: relative;
+        }
+
+    div svg{
+        margin: 0 auto;
+    }
+
+
+/*    .legend text {
+      fill: #777;
+      font: 10px sans-serif;
+      text-anchor: middle;
+    }
+*/
+    .frame {
+      fill: none;
+      stroke: #aaa;
+    }
+
+    .axis,
+    .frame {
+      shape-rendering: crispEdges;
+    }
+
+    .axis path,
+    .axis line {
+      fill: none;
+      stroke: #000;
+      shape-rendering: crispEdges;
+    }
+
+/*    .x.axis path {
+      display: none;
+    }
+*/
+    .line {
+      fill: none;
+      stroke: steelblue;
+      stroke-width: 1.5px;
+    }
+
+</style>
+
+    <script src="http://d3js.org/topojson.v1.min.js"></script>
+
+    <!-- load custom CSS and JavaScript //-->
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js"></script>
+
+</head>
+
+<body>
+<script src="d3.v3.min.js"></script>
+<script src="js/jquery.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script src="d3.tip.v0.6.3.js"></script>
+
+<!-- Fixed Navbar -->
+<nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                <span class="sr-only">Toggle Navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#">MSN 622</a>
+        </div>
+
+        <div id="navbar" class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
+                <li><a href="#homework">Homework</a></li>
+                <li><a href="#project">Project</a></li>
+                <li><a href="#participation">Participation</a></li>
+            </ul>
+
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="#about">About</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </div><!--/.nav-collapse -->
+    </div>
+</nav>
+
+<!-- <div class="jumbotron"> -->
+<div style="background-color: #eee">
+    <div class="container">
+        <h1 style="font-size: 32px">Jason Shu's Homework 5</h1>
+
+        <h3 style="font-size: 20px">TopoJSON</h3>
+        <p style="font-size: 14px">Click <a href="https://github.com/shubags/Visualizations/tree/gh-pages/HW5">here</a> for source code</p>
+
+    </div>
+</div>
+<div id="block">
+<svg id="map" width="940" height="500"></svg>
+<p id="log">Loading map... please wait.</p>
+</div>
+
+<script>
+/*
+ * For sample TopoJSON files, go to:
+ * https://gist.github.com/mbostock/4090846
+ */
+
+
+var base = "https://gist.githubusercontent.com/mbostock/4090846/raw/";
+var url = {
+    world: base + "world-50m.json",
+    earthquakes: "4.5_month.csv"
+    // country: base + "us.json",
+    // states:  base + "us-state-names.tsv",
+    // precip:  "usprecip.json" // relative URL
+
+
+};
+
+// Uses reusable chart model
+// See http://bost.ocks.org/mike/chart/
+var chart = symbolMap();
+
+// Update how we access data (need the precip property)
+chart = chart.value(function(d) { return d.mag; });
+
+// Nested calls to trigger drawing in proper order
+d3.json(url.world, function(mapError, mapJSON) {
+    if (processError(mapError)) return;
+
+    // update map data
+    chart = chart.map(mapJSON);
+
+    // Wait until the map is drawn before loading
+    // and drawing the data values
+    d3.csv(url.earthquakes, function(dataError, dataCSV) {
+        if (processError(dataError)) return;
+
+        chart = chart.values(dataCSV);
+        chart("map");
+    });
+});
+
+// Load state lookup information
+// Possible some lookups will fail until this loads
+// d3.tsv(url.states, parseStateName, function(error, data) {
+//         if (processError(error)) return;
+//         chart = chart.lookup(data);
+//     }
+// );
+
+</script>
+</div>
+
+<div class="row">
+    <div class="col-md-12">
+        <h2 class="page-header">Project Description</h2>
+    </div>
+</div>
+
+
+<div class="row">
+    <div class="col-md-6">
+        <div class="media-body">
+            <p>The purpose of this assignment was to:
+                <ul>
+                    <li> Practice the creation of a dashboard to understand data</li>
+                    <!-- <li> Exploring the capabilities of d3 and small-multiple plots</li> -->
+                </ul>
+            </p>
+            <p>Functionality was built in phases to successively build on features. The following phases of
+                describe the features added.
+            </p>
+            <h4> Basic functionality (C-Level) </h3>
+                <ul>
+                    <li>Data manipulation: I subsetted data to exclude data with no values for:</li>
+                      <ul>
+                          <li>Movies with no budget data</li>
+                          <li>Movies with no MPAA rating</li>
+                      </ul>
+
+                    <li>Aligned area chart and bar chart to visualize that the money spent on producing movies was increasing while the amount spent per movie had decreased. </li>
+                </ul>
+<!--             <h4> Moderate functionality (B-Level) </h3>
+            <ul>
+                <li> Added brushing to a third plot that allows focus and context for a more specific measurement of driving death rates. </li>
+ --><!--                 <li> A button was added to allow sorting alphabetically or 
+                 by frequency </li> -->
+            </ul>
+
+
+            </ul>
+        </div>
+    </div>
+
+    <div class="col-md-6">
+        <div class="media-body">
+            <h4> Design decisions </h4>
+            <p>
+                As mentioned earlier, I wanted to ensure that the data of the bar chart and the area chart were aligned. I also wanted to distinguish between the genres of movies to show the relative amount that was spent on each type. I chose not to show the number of movies that were created for each genre because I felt this to be another level of detail that was too much for the casual viewer to comprehend.
+            </p>
+            <p>
+                I put the box plot in the dashboard because I thought it was interesting to see the difference between the distribution of viewer ratings for the different MPAA ratings for movies.
+            </p>
+        </div>
+    </div>
+
+</div>
+
+<hr/>
+
+<footer>
+    <p style="text-align: center;">Jason Shu &bullet; MSAN 622 Information Visualization &bullet; Spring 2015</p>
+</footer>
+
+</div><!--/.container -->
+
+</body>
+</html>
