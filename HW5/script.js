@@ -261,7 +261,7 @@ function symbolMap() {
             });
 
         updateLog("This earthquake at " + d.latitude + " latitude and " 
-            + d.longitude + " longitude had a magnitude of " + d.mag +" and occurred at a depth of " + d.depth + "kilometers.");
+            + d.longitude + " longitude had a magnitude of " + d.mag +" and occurred at a depth of " + d.depth + " kilometers.");
     }
 
     // called on mouseout
