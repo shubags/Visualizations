@@ -237,11 +237,9 @@ d3.json(url.world, function(mapError, mapJSON) {
                     <li>Modified code to make circle radius' the magnitude of the earthquakes</li>
                     <li>Changed the message at the bottom of the visualization to read what the magnitude of the earthquake was and the lat/long of the event</li>
                 </ul>
-<!--             <h4> Moderate functionality (B-Level) </h3>
+            <h4> Moderate functionality (B-Level) </h3>
             <ul>
-                <li> Added brushing to a third plot that allows focus and context for a more specific measurement of driving death rates. </li>
- --><!--                 <li> A button was added to allow sorting alphabetically or 
-                 by frequency </li> -->
+                <li> Added functionality to have color represent the depth of the earthquake. Orange represents the minimum value while blue represents the maximum value in the range. </li>
             </ul>
 
 
@@ -256,6 +254,8 @@ d3.json(url.world, function(mapError, mapJSON) {
                 I chose to truncate the map of the world to ensure that the user could read the text below the visualization. By trying to fit the entire map, the user would have had to put the curson on the circle at a point where they would need to scroll down to read the event details (which would not work).
 
                 I chose to keep the mercator projection because it is easy for people to interpret because it keeps everything in rectangular scales. Many of the issues related to mercator projections were mitigated by the truncation of high longitude locations (i.e. everything near the poles).
+
+                I chose blue and orange because they are opposite colors on the color wheel, which was my attempt to show the contrast between the minimum and maximum values.
             </p>
         </div>
     </div>
@@ -268,7 +268,7 @@ d3.json(url.world, function(mapError, mapJSON) {
     <p style="text-align: center;">Jason Shu &bullet; MSAN 622 Information Visualization &bullet; Spring 2015</p>
 </footer>
 
-</div><!--/.container -->
+</div></container>
 
 </body>
 </html>

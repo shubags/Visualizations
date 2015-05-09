@@ -97,6 +97,11 @@ function symbolMap() {
             .attr("d", path)
             .classed({"country": true});
 
+        var color = d3.scale.linear()
+            .domain([7,604])
+            .range(['orange', 'blue'])
+            .interpolate(d3.interpolateLab);
+
         // draw symbols
         symbols.selectAll("circle")
             .data(values)
@@ -113,6 +118,8 @@ function symbolMap() {
             .attr("cy", function(d, i) {
                 return projection([d.longitude, d.latitude])[1];
             })
+            .style("fill", function(d){ return color(d.depth);})
+            .style("stroke", function(d){ return color(d.depth);})
             .classed({"symbol": true})
             .on("mouseover", showHighlight)
             .on("mouseout", hideHighlight);
@@ -254,7 +261,7 @@ function symbolMap() {
             });
 
         updateLog("This earthquake at " + d.latitude + " latitude and " 
-            + d.longitude + " longitude had a magnitude of " + d.mag +".");
+            + d.longitude + " longitude had a magnitude of " + d.mag +" and occurred at a depth of " + d.depth + "kilometers.");
     }
 
     // called on mouseout
