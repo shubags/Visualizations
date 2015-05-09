@@ -224,7 +224,7 @@ d3.json(url.world, function(mapError, mapJSON) {
         <div class="media-body">
             <p>The purpose of this assignment was to:
                 <ul>
-                    <li> Practice the creation of a dashboard to understand data</li>
+                    <li> Practice the creation of a maps using TopoJSON</li>
                     <!-- <li> Exploring the capabilities of d3 and small-multiple plots</li> -->
                 </ul>
             </p>
@@ -233,13 +233,9 @@ d3.json(url.world, function(mapError, mapJSON) {
             </p>
             <h4> Basic functionality (C-Level) </h3>
                 <ul>
-                    <li>Data manipulation: I subsetted data to exclude data with no values for:</li>
-                      <ul>
-                          <li>Movies with no budget data</li>
-                          <li>Movies with no MPAA rating</li>
-                      </ul>
-
-                    <li>Aligned area chart and bar chart to visualize that the money spent on producing movies was increasing while the amount spent per movie had decreased. </li>
+                    <li>Modified the original code to show circles where earthquakes hit</li>
+                    <li>Modified code to make circle radius' the magnitude of the earthquakes</li>
+                    <li>Changed the message at the bottom of the visualization to read what the magnitude of the earthquake was and the lat/long of the event</li>
                 </ul>
 <!--             <h4> Moderate functionality (B-Level) </h3>
             <ul>
@@ -257,10 +253,9 @@ d3.json(url.world, function(mapError, mapJSON) {
         <div class="media-body">
             <h4> Design decisions </h4>
             <p>
-                As mentioned earlier, I wanted to ensure that the data of the bar chart and the area chart were aligned. I also wanted to distinguish between the genres of movies to show the relative amount that was spent on each type. I chose not to show the number of movies that were created for each genre because I felt this to be another level of detail that was too much for the casual viewer to comprehend.
-            </p>
-            <p>
-                I put the box plot in the dashboard because I thought it was interesting to see the difference between the distribution of viewer ratings for the different MPAA ratings for movies.
+                I chose to truncate the map of the world to ensure that the user could read the text below the visualization. By trying to fit the entire map, the user would have had to put the curson on the circle at a point where they would need to scroll down to read the event details (which would not work).
+
+                I chose to keep the mercator projection because it is easy for people to interpret because it keeps everything in rectangular scales. Many of the issues related to mercator projections were mitigated by the truncation of high longitude locations (i.e. everything near the poles).
             </p>
         </div>
     </div>
