@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<title>Jason Shu's Visualization Final Project</title>
+
+<link href="css/bootstrap.min.css" rel="stylesheet">
+<link href="css/bootstrap-theme.min.css" rel="stylesheet">
+
+<style type="text/css">
+    body {
+        padding-top: 50px;
+        padding-bottom: 20px;
+    }
+
+    .axis text {
+        font-family: sans-serif;
+        font-size: 16px;
+    }
+
+    .brush .extent {
+      stroke: #fff;
+      fill-opacity: .125;
+      shape-rendering: crispEdges;
+    }
+
+
+   .d3-tip {
+      line-height: 1;
+      font-weight: bold;
+      padding: 12px;
+      background: rgba(0, 0, 0, 0.8);
+      color: #fff;
+      border-radius: 2px;
+    }
+
+    /* Creates a small triangle extender for the tooltip */
+    .d3-tip:after {
+      box-sizing: border-box;
+      display: inline;
+      font-size: 10px;
+      width: 100%;
+      line-height: 1;
+      color: rgba(0, 0, 0, 0.8);
+      content: "\25BC";
+      position: absolute;
+      text-align: center;
+    }
+
+    /* Style northward tooltips differently */
+    .d3-tip.n:after {
+      margin: -1px 0 0 0;
+      top: 100%;
+      left: 0;
+    }
+
+    label {
+        position: relative;
+        }
+
+    div svg{
+        margin: 0 auto;
+    }
+
+
+/*    .legend text {
+      fill: #777;
+      font: 10px sans-serif;
+      text-anchor: middle;
+    }
+*/
+    .frame {
+      fill: none;
+      stroke: #aaa;
+    }
+
+    .axis,
+    .frame {
+      shape-rendering: crispEdges;
+    }
+
+    .axis path,
+    .axis line {
+      fill: none;
+      stroke: #000;
+      shape-rendering: crispEdges;
+    }
+
+/*    .x.axis path {
+      display: none;
+    }
+*/
+    .line {
+      fill: none;
+      stroke: steelblue;
+      stroke-width: 1.5px;
+    }
+
+</style>
+
+</head>
+
+<body>
+
+<!-- Fixed Navbar -->
+<nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                <span class="sr-only">Toggle Navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#">MSN 622</a>
+        </div>
+
+        <div id="navbar" class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
+                <li><a href="#homework">Homework</a></li>
+                <li><a href="#project">Project</a></li>
+                <li><a href="#participation">Participation</a></li>
+            </ul>
+
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="#about">About</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </div><!--/.nav-collapse -->
+    </div>
+</nav>
+
+<!-- <div class="jumbotron"> -->
+<div style="background-color: #eee">
+    <div class="container">
+        <h1 style="font-size: 32px">Jason Shu's Final Project</h1>
+
+        <h3 style="font-size: 20px">Project Video</h3>
+        <p style="font-size: 14px">Click <a href="https://github.com/shubags/Visualizations/tree/gh-pages/final_project/video">here</a> for source code</p>
+
+    </div>
+</div>
+
+
+<div style="display: block; margin-left: auto; margin-right: auto;">
+
+<iframe style="display: block; margin-left: auto; margin-right: auto;" width="600" height="415" src="https://www.youtube.com/embed/r_yUfVMzSXc" frameborder="0" allowfullscreen></iframe>
+
+
+</div>
+
+<hr/>
+
+<footer>
+    <p style="text-align: center;">Jason Shu &bullet; MSAN 622 Information Visualization &bullet; Spring 2015</p>
+</footer>
+
+</div><!--/.container -->
+
+</body>
+</html>
