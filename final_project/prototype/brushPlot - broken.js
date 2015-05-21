@@ -63,15 +63,36 @@ var area2 = d3.svg.area()
 var stack = d3.layout.stack()
                      .values(function(d) { return d.values; });
 
+
+// load in the data and add to svg
+d3.csv("natoSpending.csv", function(error, data) {
+
+
 // create svg for c level functionality
 var svg2 = d3.select("#myPlot3")
-             .append("svg")
-             .attr("width", width1 + margin1.left + margin1.right)
-             .attr("height", height1 + margin1.top + margin1.bottom)
-             .attr("display", "block") 
+            .append("svg")
+            .attr("width", width1 + margin1.left + margin1.right)
+            .attr("height", height1 + margin1.top + margin1.bottom)
+            .attr("display", "block") 
             .attr("left-margin", "auto")
             .attr("right-margin", "auto");
 
+// add color into data  
+colorScale1.domain(d3.keys(data[0]).filter(function(key) { return key !== "date"; }));
+
+// add new date into data
+data.forEach(function(d) { d.date = parseDate(d.date); });
+
+var headerNames = d3.keys(data[0]).filter(function(key) { return key !== "date"; });
+
+console.log(headerNames);
+
+
+// var seriesArr = [], series = {};
+//   headerNames.forEach(function (name) {
+//   series[name] = {name: name, values:[]};
+//   seriesArr.push(series[name]);
+//   });
 
 svg2.append("text")
    .attr("x", (width1 / 2) + margin1.left)
@@ -99,50 +120,47 @@ var context = svg2.append("g")
                   .attr("class", "context")
                   .attr("transform", "translate(" + margin2.left + "," + margin2.top + ")");
 
-// create a tooltip for hover
-// var tooltip = d3.select("body").append("div")   
-//     .attr("class", "tooltip")               
-//     .style("opacity", 0.9);
+var points = svg2.selectAll(".seriesPoints")
+    .data(spending)
+    .enter().append("g")
+    .attr("class", "seriesPoints");
+
+points.selectAll(".point")
+   .data(function(d){return d.values;})
+   .enter().append("circle")
+   .attr("class", "point")
+   .attr("cx", function (d) { return xScale2(d.name) + xScale2.range() / 2; })
+   .attr("cy", function (d) { return yScale2(d.y0 + d.y); })
+   .attr("r", "10px")
+   .style("fill",function (d) { return color(d.name); })
+   .on("mouseover", function (d) { showPopover.call(this, d); })
+   .on("mouseout",  function (d) { removePopovers(); })
 
 
-
-// load in the data and add to svg
-d3.csv("natoSpending.csv", function(error, data) {
-
-
-    // add color into data  
-    colorScale1.domain(d3.keys(data[0]).filter(function(key) { return key !== "date"; }));
-
-    // add new date into data
-    data.forEach(function(d) { d.date = parseDate(d.date); });
-
-    var headerNames = d3.keys(data[0]);
-    console.log(headerNames);
-
-    var tip = d3.tip()
-      .attr('class', 'd3-tip')
-      .html(function(d) {
-        return "<strong>Year: </strong> <span style='color:red'>" + d.date + "</span><br>" + 
-                     "<strong>Country: </strong> <span style='color:red'>" + d.name + "</span><br>" +
-                     "<strong>Budget: </strong> <span style='color:red'>" + d.y + "</span>"
-        ;
-      });
+var tip = d3.tip()
+  .attr('class', 'd3-tip')
+  .html(function(d) {
+    return "<strong>Year: </strong> <span style='color:red'>" + d.date + "</span><br>" + 
+                 "<strong>Country: </strong> <span style='color:red'>" + d.name + "</span><br>" +
+                 "<strong>Budget: </strong> <span style='color:red'>" + d.y + "</span>"
+    ;
+  });
 
 
-    // call tooltip
-    svg2.call(tip);
-    
-    // create objects with data for each line
-    var spending = stack(colorScale1.domain().map(function(name) {
-        return {
-            name: name,
-            values: data.map(function(d) {
-                return {date: d.date, y: +d[name]};
-            })
-        };
+// call tooltip
+svg2.call(tip);
 
-    }));
-    console.log(spending)
+// create objects with data for each line
+var spending = stack(colorScale1.domain().map(function(name) {
+    return {
+        name: name,
+        values: data.map(function(d) {
+            return {date: d.date, y: +d[name]};
+        })
+    };
+}));
+console.log(spending)
+
     // add in the scales for each chart
 
     // var maxY = Math.max.apply(Math, d3.values(letters))
@@ -241,9 +259,26 @@ d3.csv("natoSpending.csv", function(error, data) {
           .attr('y', 10)
           .text(function(d) { return d.key; });
 
+function removePopovers () {
+  $('.popover').each(function() {
+    $(this).remove();
+  }); 
+};
 
-})
-
+function showPopover (d) {
+          $(this).popover({
+            title: d.group,
+            placement: 'auto top',
+            container: 'body',
+            trigger: 'manual',
+            html : true,
+            content: function() { 
+              return "Month: " + d.label + 
+                     "<br/>Deaths: " + d3.format(",")(d.value ? d.value: d.y1 - d.y0); }
+          });
+$(this).popover('show')
+};
+};
 // function for brushing
 function brushed() {
     xScale1.domain(brush.empty() ? xScale2.domain() : brush.extent());
@@ -251,7 +286,7 @@ function brushed() {
     focus.select(".x.axis").call(xAxis1);
     // dots2.selectAll("point.dot").attr("cx", function(d) { return xScale1(d.date); }) 
     //                             .attr("cy", function(d) { return yScale1(d.y0 + d.y); }); 
-}
+};
 
 // create object of colors and regions
 function create_colors(headerNames) {
@@ -261,7 +296,8 @@ function create_colors(headerNames) {
 
     return colors
   }
-}
+};
+
 
 
 

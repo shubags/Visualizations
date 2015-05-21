@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<head>
+  <link rel="stylesheet" href="./css/styles.css">
+  <link rel="stylesheet" href="./css/myStylesheet.css">
+
+</head>
+<style>
+    #writeup {
+        width: 100%;
+    }
+    #functionality {
+        width: 50%;
+        float: left;
+        padding: 5px;
+        margin-right: 15px;
+    }
+    #plot {
+        margin-left: auto;
+        margin-right: auto;
+    }
+    .bar {
+        fill: rgba(44,123,182, .8);
+    }
+    .bar:hover {
+      fill: rgba(171,217,233, 1.0);
+    }
+    .axis text {
+        font: 10px sans-serif;
+    }
+    .axis path,
+    .axis line {
+        fill: none;
+        stroke: darkgray;
+        shape-rendering: crispEdges;
+    }
+    .x.axis path {
+        display: none;
+    }
+    .d3-tip {
+      line-height: 1;
+      font-weight: bold;
+      padding: 12px;
+      background: rgba(253,174,97, 0.8);
+      color: #fff;
+      border-radius: 2px;
+    }
+    /* Creates a small triangle extender for the tooltip */
+    .d3-tip:after {
+      box-sizing: border-box;
+      display: inline;
+      font-size: 10px;
+      width: 100%;
+      line-height: 1;
+      color: rgba(253,174,97, 0.8);
+      content: "\25BC";
+      position: absolute;
+      text-align: center;
+    }
+    /* Style northward tooltips differently */
+    .d3-tip.n:after {
+      text-align: center;
+      margin: -2px 0 0 0;
+      top: 100%;
+      left: 0;
+    }
+</style>
+
+<svg class="chart" height="1" width="1"></svg>
+<script src="d3.v3.min.js"></script>
+<script src="d3.tip.v0.6.3.js"></script>
+<div id="chart2"></div>
+
+<script>
+
+
+var margin = {top: 20, right: 20, bottom: 30, left: 70},
+    width = 960 - margin.left - margin.right,
+    height = 500 - margin.top - margin.bottom;
+
+var x = d3.scale.ordinal()
+    .rangeRoundBands([0, width], .1);
+
+var y = d3.scale.linear()
+    .range([height, 0])
+    .nice();
+
+var xAxis = d3.svg.axis()
+    .scale(x)
+    .orient("bottom")
+    .outerTickSize(0)
+    .innerTickSize(0);
+
+// set y-axis ticks to increment by 5 (B-level #2)
+var yAxis = d3.svg.axis()
+     .scale(y)
+    .orient("left")
+    .ticks(4)
+    .tickFormat(d3.format("d"))
+    .tickSubdivide(0);
+// initialize chart margins and initial <g>
+var chart = d3.select("#chart")
+        .attr("width", width + margin.left + margin.right)
+        .attr("height", height + margin.top + margin.bottom)
+        .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+// append a new SVG within the chart div
+var svg = chart.append("svg")
+    .attr("width", width + margin.left + margin.right)
+    .attr("height", height + margin.top + margin.bottom)
+    .attr("id", "plot")
+    .attr("display", "block")
+    .append("g")
+    .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+var vowels = ["a", "e", "i", "o", "u"];
+// tooltip that includes the letter and frequency count on bar hover
+var tip = d3.tip()
+  .attr('class', 'd3-tip')
+  .offset([-10, 0])
+  .html(function(d) {
+    return "<span style='font: 11px sans-serif;'><strong>" + d.key.toUpperCase() + 
+    "<br>Frequency: </strong></span> <span style='font-size: 11px; color: rgb(215,25,28)'>" + d.value + "</span>";
+  })
+function cleanString(query) {
+    // function to clean the query string of everything but alphanumerics
+    String.prototype.cleanup = function() {
+        return this.toLowerCase().replace(/[^a-zA-Z]+/g, '');
+    }
+    // get cleaned-up string
+    var cleanString = query.cleanup();
+    // init hash table of letters and their counts
+    var letterCounts = Object();
+    // iterate through string to populate hash table
+    for (i = 0; i < cleanString.length; i++) {
+        var l = cleanString.charAt(i);
+        letterCounts[l] = (isNaN(letterCounts[l]) ? 1 : letterCounts[l] + 1);
+    }
+    return letterCounts;
+}
+function query_window() {
+    // get query string from the URI
+    // process query string to remove non-alphabet characters; create list of objects to store letter counts
+    var letters = d3.entries(cleanString(decodeURI(window.location.search)));
+    drawChart(letters);
+}
+function query_textbox() {
+    // get query string from the input box instead of the window
+    var letterArray = d3.entries(cleanString(document.getElementById("queryString").value));
+    drawChart(letterArray);
+}
+function drawChart(qString) {
+    // process query string to remove non-alphabet characters; create list of objects to store letter counts
+    var letterArray = qString;
+    // set domain ranges for axes
+    x.domain(letterArray.map(function(d) { return d.key; }));
+    y.domain([0, d3.max(letterArray, function(d) { return d.value; })]);
+    // calls the tooltip function
+    svg.call(tip);
+    // remove bars
+    d3.selectAll("rect")
+        // .transition()
+        // .duration(500)
+        // .attr("y", height)                              // set initial y to the height of the svg
+        // .attr("height", 0)                              // set initial height to 0
+        .remove();
+    // redraw the x-axis
+    chart.select(".x.axis").remove();
+    svg.append("g")
+        .attr("class", "x axis")
+        .attr("transform", "translate(0," + height + ")")
+        .call(xAxis);
+    // redraw the y-axis
+    chart.select(".y.axis").remove();
+    svg.append("g")
+        .attr("class", "y axis")
+        .call(yAxis)
+        // modified "Frequency" axis label to be horizontal and above the line, for readability (B-level #4)
+        .append("text")
+        .attr("y", 6)
+        .attr("dy", "-1.5em")
+        .style("text-anchor", "end")
+        .text("Frequency");
+    // select all bars for updating 
+    var bar = svg.selectAll(".bar")
+        .data(letterArray, function(d) {return d.key;});
+    // add bars
+    bar.enter().append("rect")
+        .attr("class", "bar")
+        .attr("x", function(d) { return x(d.key); })
+        .attr("y", height)                              // set initial y to the height of the svg
+        .attr("height", 0)                              // set initial height to 0
+        .attr("width", x.rangeBand())
+        // transitions to "grow" bars from 0
+        .transition()
+        .delay(function(d,i) {return i * 100; })
+        .duration(1000)
+        // post-transition values set as their actuals
+        .attr("y", function(d) {return y(d.value); })
+        .attr("height", function(d) { return height - y(d.value); });
+        // change color of bars that correspond to vowels (B-level #5)
+        // .style("fill", function(d) {
+        //     if (vowels.indexOf(d.key) > -1) {return "#ef8a62"}
+        //     else {return "steelblue"};
+        // })
+    // tooltips on hover
+    bar.on("mouseover", tip.show)
+        .on("mouseout", tip.hide);
+    /* functions & call for alphabetic vs. count sort */
+    d3.select("#changeSort").on("change", change);
+    function change() {
+        // Copy-on-write since tweens are evaluated after a delay.
+        var x0 = x.domain(letterArray.sort(this.checked
+            ? function(a, b) { return b.value - a.value; }
+            : function(a, b) { return d3.ascending(a.key, b.key); })
+            .map(function(d) { return d.key; }))
+            .copy();
+        svg.selectAll(".bar")
+            .sort(function(a, b) { return x0(a.key) - x0(b.key); });
+        var transition = svg.transition().duration(500),
+            delay = function(d, i) { return i * 50; };
+        transition.selectAll(".bar")
+            .delay(delay)
+            .attr("x", function(d) { return x0(d.key); });
+        transition.select(".x.axis")
+            .call(xAxis)
+            .selectAll("g")
+            .delay(delay);
+    }
+/* OLD CODE: BASIC SORT
+    // sort letters alphabetically (B-level #3)
+    letterArray = letterArray.sort(function(a,b) { 
+      if (a.key < b.key)
+        return -1
+      if (b.key < a.key)
+      return 1
+      return 0 
+    });
+*/
+}
+function type(d) {
+  d.value = +d.value;
+  return d;
+}
+// draw the chart with initial data when the window opens up
+window.onload = query_window();
