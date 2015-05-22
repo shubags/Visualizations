@@ -1,7 +1,8 @@
+function plot3(){
 // create both margins for svg
-var margin1 = {top: 20, right: 80, bottom: 170, left: 130},
-    margin2 = {top: 460, right: 80, bottom: 50, left: 130}
-    width1 = 1100 - margin1.left - margin1.right,
+var margin1 = {top: 20, right: 80, bottom: 170, left: 80},
+    margin2 = {top: 460, right: 80, bottom: 50, left: 80}
+    width1 = 960 - margin1.left - margin1.right,
     height1 = 600 - margin1.top - margin1.bottom,
     height2 = 600 - margin2.top - margin2.bottom;
 
@@ -79,7 +80,7 @@ svg2.append("text")
    .style("text-anchor", "middle")
    .style("font-size", "24px")
    .style("font-weight", "bold")
-   .text("United States Leads Way in Defense Spending");
+   .text("NATO Country's Absolute Defense Spending");
 
 
 // add clip range (so brushing/panning do go out of range)
@@ -117,20 +118,18 @@ d3.csv("natoSpending.csv", function(error, data) {
     data.forEach(function(d) { d.date = parseDate(d.date); });
 
     var headerNames = d3.keys(data[0]);
+    console.log(headerNames);
 
-    // var tip = d3.tip()
-    //   .attr('class', 'd3-tip')
-    //   .html(function(d) {
-    //     return "<strong>Year: </strong> <span style='color:red'>" + d.date + "</span><br>" + 
-    //                  "<strong>Country: </strong> <span style='color:red'>" + d.name + "</span><br>" +
-    //                  "<strong>Budget: </strong> <span style='color:red'>" + d.y + "</span>"
-    //     ;
-    //   });
+    var tip = d3.tip()
+      .attr('class', 'd3-tip')
+      .html(function(d) {
+        return "<strong>Country: </strong> <span style='color:red'>" + d.name + "</span>"
+        ;
+      });
 
-    console.log(colorScale1.range())
 
     // call tooltip
-    // svg2.call(tip);
+    svg2.call(tip);
     
     // create objects with data for each line
     var spending = stack(colorScale1.domain().map(function(name) {
@@ -147,7 +146,7 @@ d3.csv("natoSpending.csv", function(error, data) {
 
     // var maxY = Math.max.apply(Math, d3.values(letters))
     xScale1.domain(d3.extent(data.map(function(d) { return d.date; })));
-    yScale1.domain([0, 1000]);
+    yScale1.domain([0, 1100]);
     xScale2.domain(xScale1.domain());
     yScale2.domain(yScale1.domain());
 
@@ -160,9 +159,8 @@ d3.csv("natoSpending.csv", function(error, data) {
          .attr("d", function(d) { return area1(d.values); })
          .attr('class', 'focus')
          .style("fill", function(d) { return colorScale1(d.name); })
-         // .on('mouseover', tip.show)
-         // .on('mouseout', tip.hide)
-         ;
+         .on('mouseover', tip.show)
+         .on('mouseout', tip.hide);
 
     // add in the x axis
     focus.append("g")
@@ -182,7 +180,7 @@ d3.csv("natoSpending.csv", function(error, data) {
          .attr("x", 0 - height1/2)
          .attr("dy", "1em")
          .style("text-anchor", "middle")
-         .text("NATO Country's Defense Spending (in millions of FY11 $US)")
+         .text("Defense Spending (in billions of FY11 $US)")
          .style("font-size", "16px");
 
     // add in path and area for small chart
@@ -228,8 +226,6 @@ d3.csv("natoSpending.csv", function(error, data) {
                         return 'translate(' + (width + margin1.right) + ',' + (i * 20) + ')';
                       });
 
-    console.log(colors)
-
     // fill rectangles with colors
     legend.append('rect')
           .attr('height', 15)
@@ -267,33 +263,8 @@ function create_colors(headerNames) {
 }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+};
+plot3()
 
 
 

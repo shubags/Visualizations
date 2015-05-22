@@ -43,16 +43,16 @@ var svg = d3.select("#myPlot1").append("svg")
 
 d3.csv("natoSpendingPct.csv", function(error, data) {
 
-var tip = d3.tip()
-  .attr('class', 'd3-tip')
-  .offset([-10, 0])
-  .html(function(d) {
-    return "<strong>Country:</strong> <span style='color:red'>" + d.name + "</span><br>" + 
-           "<strong>Country:</strong> <span style='color:red'>" + d.value + "</span>"
-            ;
-  })
+// var tip = d3.tip()
+//   .attr('class', 'd3-tip')
+//   .offset([-10, 0])
+//   .html(function(d) {
+//     return "<strong>Country:</strong> <span style='color:red'>" + d.name + "</span><br>" + 
+//            "<strong>Country:</strong> <span style='color:red'>" + d.value + "</span>"
+//             ;
+//   })
 
-svg.call(tip);
+// svg.call(tip);
 
   countries = d3.keys(data[0]).filter(function(key) { return key !== "date"; });
   console.log(countries)
@@ -132,8 +132,8 @@ svg.call(tip);
       .attr("class", "line")
       .attr("d", function(d) { return line(d.values); })
       .style("stroke", function(d) { return color(d.name); })
-      .on('mouseover', tip.show)
-      .on('mouseout', tip.hide) 
+      // .on('mouseover', tip.show)
+      // .on('mouseout', tip.hide) 
 ;
 
   // seat.append("text")

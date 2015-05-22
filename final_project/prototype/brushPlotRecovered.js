@@ -109,6 +109,15 @@ var context = svg2.append("g")
 // load in the data and add to svg
 d3.csv("natoSpending.csv", function(error, data) {
 
+    var tip = d3.tip()
+      .attr('class', 'd3-tip')
+      .html(function(d) {
+        var report = "<strong>Year: </strong> <span style='color:red'>" + d.date + "</span><br>" + 
+                     "<strong>Country: </strong> <span style='color:red'>" + d.key + "</span><br>" +
+                     "<strong>Budget: </strong> <span style='color:red'>" + d.value + "</span>"
+        return report;
+      });
+
 
     // add color into data  
     colorScale1.domain(d3.keys(data[0]).filter(function(key) { return key !== "date"; }));
@@ -117,20 +126,10 @@ d3.csv("natoSpending.csv", function(error, data) {
     data.forEach(function(d) { d.date = parseDate(d.date); });
 
     var headerNames = d3.keys(data[0]);
-
-    // var tip = d3.tip()
-    //   .attr('class', 'd3-tip')
-    //   .html(function(d) {
-    //     return "<strong>Year: </strong> <span style='color:red'>" + d.date + "</span><br>" + 
-    //                  "<strong>Country: </strong> <span style='color:red'>" + d.name + "</span><br>" +
-    //                  "<strong>Budget: </strong> <span style='color:red'>" + d.y + "</span>"
-    //     ;
-    //   });
-
-    console.log(colorScale1.range())
+    console.log(headerNames);
 
     // call tooltip
-    // svg2.call(tip);
+    svg2.call(tip);
     
     // create objects with data for each line
     var spending = stack(colorScale1.domain().map(function(name) {
@@ -147,7 +146,7 @@ d3.csv("natoSpending.csv", function(error, data) {
 
     // var maxY = Math.max.apply(Math, d3.values(letters))
     xScale1.domain(d3.extent(data.map(function(d) { return d.date; })));
-    yScale1.domain([0, 1000]);
+    yScale1.domain([0, 1100000]);
     xScale2.domain(xScale1.domain());
     yScale2.domain(yScale1.domain());
 
@@ -160,9 +159,8 @@ d3.csv("natoSpending.csv", function(error, data) {
          .attr("d", function(d) { return area1(d.values); })
          .attr('class', 'focus')
          .style("fill", function(d) { return colorScale1(d.name); })
-         // .on('mouseover', tip.show)
-         // .on('mouseout', tip.hide)
-         ;
+         .on('mouseover', tip.show)
+         .on('mouseout', tip.hide);
 
     // add in the x axis
     focus.append("g")
@@ -228,8 +226,6 @@ d3.csv("natoSpending.csv", function(error, data) {
                         return 'translate(' + (width + margin1.right) + ',' + (i * 20) + ')';
                       });
 
-    console.log(colors)
-
     // fill rectangles with colors
     legend.append('rect')
           .attr('height', 15)
@@ -252,8 +248,8 @@ function brushed() {
     xScale1.domain(brush.empty() ? xScale2.domain() : brush.extent());
     focus.selectAll("path.focus").attr("d", function(d) { return area1(d.values);});
     focus.select(".x.axis").call(xAxis1);
-    // dots2.selectAll("point.dot").attr("cx", function(d) { return xScale1(d.date); }) 
-    //                             .attr("cy", function(d) { return yScale1(d.y0 + d.y); }); 
+    dots2.selectAll("point.dot").attr("cx", function(d) { return xScale1(d.date); }) 
+                                .attr("cy", function(d) { return yScale1(d.y0 + d.y); }); 
 }
 
 // create object of colors and regions
@@ -265,35 +261,3 @@ function create_colors(headerNames) {
     return colors
   }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
