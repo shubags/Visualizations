@@ -174,7 +174,7 @@ d3.csv("natoSpending.csv", function(error, data) {
     // add y axis label
     focus.append("text")
          .attr("transform", "rotate(-90) translate(-10, 0)")
-         .attr("y", 0 - margin1.left + 5)
+         .attr("y", 0 - margin1.left + 10)
          .attr("x", 0 - height1/2)
          .attr("dy", "1em")
          .style("text-anchor", "middle")
