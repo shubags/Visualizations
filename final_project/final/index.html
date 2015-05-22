@@ -228,7 +228,7 @@
 <div class="desc">
 <h4> The United States dominates NATO spending </h4>
 <p>
-  As you can be easily seen in the plot above, the U.S. was the dominant defense spender within NATO throughout the organization's existance. 
+  As you can be easily seen in the plot below, the U.S. was the dominant defense spender within NATO throughout the organization's existance. By grabbing the slider with your mouse and moving it left and right, you can update the year that is shown on the bar chart below. After updating the year, simply click the "Update Spending" button to discover the defense spending in each country during that year. If you hover your mouse pointer over the bar, you can discover exactly what that country spent that year.
 </p>
 
 </div>
@@ -397,7 +397,6 @@ var svg = d3.select("#barChart").append("svg")
 
 d3.csv("natoSpending_BY_YEAR.csv", function(error, data) {
 
-  
   years = d3.keys(data[0]).filter(function(key) { return key !== "name"; });
   yearsDt = years.map(function(d){return parseDate(d);});
 
@@ -412,6 +411,16 @@ d3.csv("natoSpending_BY_YEAR.csv", function(error, data) {
       })
     };
   });
+
+  var tip = d3.tip()
+    .attr('class', 'd3-tip')
+    .offset([-10, 0])
+    .html(function(d) {
+      return "<strong>Name: </strong> <span style='color:red'>" + d.name + "</span><br>" + 
+             "<strong>Spending: </strong> <span style='color:red'>$" + d.spending.toFixed(1) + "B</span>";
+    });
+
+  svg.call(tip);
 
   countries = spending[0].values.map(function(d){return d.name;}).sort();
 
@@ -448,7 +457,12 @@ d3.csv("natoSpending_BY_YEAR.csv", function(error, data) {
       .attr("x", function(d){return x(d.name);})
       .attr("width", x.rangeBand())
       .attr("y", function(d) { return y(d.spending); })
-      .attr("height", function(d) { return height - y(d.spending); });
+      .attr("height", function(d) { return height - y(d.spending); })
+     .on('mouseover', tip.show)
+     .on('mouseout', tip.hide) 
+
+      ;
+
 
   d3.select("input").on("change", change);
 
@@ -492,6 +506,13 @@ d3.csv("natoSpending_BY_YEAR.csv", function(error, data) {
 };
 makeBarChart(1950)
 </script>
+</div>
+<div class="desc">
+<h4> NATO countries Continue to deemphasize defense spending </h4>
+<p>
+  As you can be easily seen in the plot below, the U.S. was the dominant defense spender within NATO throughout the organization's existance. By grabbing the slider with your mouse and moving it left and right, you can update the year that is shown on the bar chart below. After updating the year, simply click the "Update Spending" button to discover the defense spending in each country during that year. If you hover your mouse pointer over the bar, you can discover exactly what that country spent that year.
+</p>
+
 </div>
 
 
