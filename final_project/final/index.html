@@ -416,8 +416,8 @@ d3.csv("natoSpending_BY_YEAR.csv", function(error, data) {
     .attr('class', 'd3-tip')
     .offset([-10, 0])
     .html(function(d) {
-      return "<strong>Name: </strong> <span style='color:red'>" + d.name + "</span><br>" + 
-             "<strong>Spending: </strong> <span style='color:red'>$" + d.spending.toFixed(1) + "B</span>";
+      return "<strong>Name: </strong> <span style='color:white'>" + d.name + "</span><br>" + 
+             "<strong>Spending: </strong> <span style='color:white'>$" + d.spending.toFixed(1) + "B</span>";
     });
 
   svg.call(tip);
@@ -566,10 +566,10 @@ makeBarChart(1950)
     </p>
     <h5>Plot 3 - The Multiple-Line Graph</h5>
     <p>
-      The overall spending of countries is interesting, but it is misleading because wealthier countries are by nature going to spend more than poorer ones. A common measurement for guaging how important defense spending is to a nation is to measure defense spending as a percentage of GDP.
+      The overall spending of countries is interesting, but it is misleading because wealthier countries are by nature going to spend more than poorer ones. A common measurement for guaging how important defense spending is to a nation is to measure defense spending as a percentage of GDP. This graph extracts some interesting insights. For instance, while Plot 1 was good at indicating when major conflicts arose with the United States, conflicts involving smaller states were much more difficult to detect. Plot 3 highlights such situations more easily. For instance, in the early 90's, there was a spike for one particular country. Looking more deeply into what happened during that time, one realizes that the country in question, Croatia, was in the midst of a War of Independence. Likewise, a rise in one of the lines during most of the 60's points the user to Portugal, which during this time, was in the midst of the Portuguese Colonial War. These were just two of many such observations.
     </p>
     <p>
-      At its inception, NATO guidelines recommended that each member nation spend 2% of its GDP on defense. This level of spending was a threshold deemed indicative of a country's commitment to the alliance. The purpose of the line graph was to show the overall decreasing trend of spending as a percentage of GDP. This type of plot, while a messy, provides a good picture into reduced spending, en masse, over the years.
+      Unique situations aside, it can easily be seen in Plot 3 that defense spending as a percentage of GDP has been on a gradual decline. At its inception, NATO guidelines recommended that each member nation spend 2% of its GDP on defense. This level of spending was a threshold deemed indicative of a country's commitment to the alliance. The purpose of the line graph was to show the overall decreasing trend of spending as a percentage of GDP. This type of plot, while a messy, provides a good picture into reduced spending, en masse, over the years.
     </p>
     <h5>Overall</h5>
     <p>
@@ -630,7 +630,7 @@ makeBarChart(1950)
       The aftermath of Operation Enduring Freedom (OEF) and Operation Iraqi Freedom (OIF) meant that the domestic market was shrinking. As Country Manager within Boeing's International Business Development group, I was constantly asked to identify and evaluate business opportunities outside of the United States. This was a consistent theme across all U.S. defense contractors.
     </p>
     <p>
-      The irony was that all firms in Europe were clamoring to gain footholds in the United States because the European markets were so small. Nevertheless, given a mandate to find new business, Europe was a logical place to explore. My CEO famously said during a meeting, "the European market is dead." Everybody assumed that spending was on the decline, but looking at the absolute numbers shown in Plot 1 (minus the U.S.) indicated a small, but steady growth. It caused me to think about why everybody immediately jumped to the conclusion that European spending was on the decline.
+      The irony was that all firms in Europe were clamoring to gain footholds in the United States because the European markets were so small. Nevertheless, given a mandate to find new business, Europe was a logical place to explore. My CEO famously said during a meeting, "the European market is dead." Everybody assumed that spending was on the decline, but looking at the absolute numbers shown in Plot 1 (minus the U.S.) indicates a small, but steady growth. It caused me to think about why everybody immediately jumped to the conclusion that European spending was on the decline.
     </p>
     <p>
       The key takeaway from this is that, while absolute spending has been increasing ever-so-slightly in absolute terms, the outlook does in fact remain bleak. I very much wish to continue to look for alternative means to measure citizens' opinions about defense spending. This will remain the key data item that will support my point about why countries continue to deemphasize defense spending.
