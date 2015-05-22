@@ -119,7 +119,6 @@
       left: 0;
     }
 
-
 /*    .legend text {
       fill: #777;
       font: 10px sans-serif;
@@ -143,10 +142,12 @@
       shape-rendering: crispEdges;
     }
 
-/*    .x.axis path {
-      display: none;
+    .desc {
+      padding-right: 15px;
+      padding-left: 25px;
+      margin-right: auto;
+      margin-left: auto;
     }
-*/
     .line {
       fill: none;
       stroke: steelblue;
@@ -198,15 +199,39 @@
         <h1 style="font-size: 32px">Jason Shu's Final Project</h1>
 
         <h3 style="font-size: 20px">Visualization Prototype</h3>
-        <p style="font-size: 14px">Click <a href="https://github.com/shubags/Visualizations/tree/gh-pages/final_project/prototype">here</a> for source code</p>
+        <p style="font-size: 14px">Click <a href="https://github.com/shubags/Visualizations/tree/gh-pages/final_project/final">here</a> for source code</p>
 
     </div>
+</div>
+
+<div class="desc">
+
+<h2>Introduction</h2>
+<p>
+  In the aftermath of World War II, the United States led the effort to create the North Atlantic Treaty Organization, more commonly referred to as NATO. This organization, officially chartered in April 1949, was intended to combat the expansion of Communism, which was led by the Soviet Union.
+</p>
+<p>
+  Immediately after its inception, the United States engaged in the Korean War. This three year conflict caused a spike in spending, which can be seen in the figure below. Future conflicts included the Vietnam War, the Cold War, Desert Storm, Operation Enduring Freedom (OEF), and Operation Iraqi Freedom (OIF).
+</p>
+<p>
+  You can interact with the plot by dragging your mouse over the area of interest on the smaller plot. This will cause the larger plot above it to focus on just the period of time you are interested in. You can reset the larger plot by simply clicking anywhere outside of the brushed area in the smaller plot.
+</p>
+<p>
+  Countries included in the "Other" category include: Poland, Netherlands, Norway, Greece, Belgium, Denmark, Portugal, Romania, Czech.Rep., Hungary, Slovakia, Croatia, Bulgaria, Estonia, Slovenia, Lithuania, Latvia, Luxembourg, and Albania
+
 </div>
 
 <div id="myPlot3" style="display: block; margin-left: auto; margin-right: auto;"></div>
 <script src="brushPlot.js"></script>
 <div style="height: 25px;"></div>
 
+<div class="desc">
+<h4> The United States dominates NATO spending </h4>
+<p>
+  As you can be easily seen in the plot above, the U.S. was the dominant defense spender within NATO throughout the organization's existance. 
+</p>
+
+</div>
 
 <button id="updateBar" onClick="updateBarChart()">Update Spending</button>
 <label><input type="checkbox"> Sort values</label>
@@ -219,11 +244,11 @@
   // parameters
   var sliderMargin = {
       top: 10,
-      right: 50,
+      right: 100,
       bottom: 0,
       left: 50
     },
-    sliderWidth = 960 - sliderMargin.left - sliderMargin.right,
+    sliderWidth = 850 - sliderMargin.left - sliderMargin.right,
     sliderHeight = 120 - sliderMargin.bottom - sliderMargin.top;
 
 
@@ -250,7 +275,7 @@ var svg2 = d3.select("#slider").append("svg")
   .attr("height", sliderHeight + sliderMargin.top + sliderMargin.bottom)
   .append("g")
   // classic transform to position g
-  .attr("transform", "translate(" + sliderMargin.left + "," + sliderMargin.top + ")");
+  .attr("transform", "translate(" + (sliderMargin.left + 40) + "," + sliderMargin.top + ")");
 
 var formatDate = d3.time.format("%Y")
 
@@ -335,7 +360,7 @@ function updateBarChart(value) {
 function makeBarChart(chartYear){
 
 var margin = {top: 0, right: 20, bottom: 80, left: 40},
-    width = 960 - margin.left - margin.right,
+    width = 900 - margin.left - margin.right,
     height = 350 - margin.top - margin.bottom
 
 var parseDate = d3.time.format("%Y").parse;

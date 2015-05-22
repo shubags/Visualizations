@@ -78,7 +78,7 @@ svg2.append("text")
    .attr("x", (width1 / 2) + margin1.left)
    .attr("y", margin1.top)
    .style("text-anchor", "middle")
-   .style("font-size", "24px")
+   .style("font-size", "16px")
    .style("font-weight", "bold")
    .text("NATO Country's Absolute Defense Spending");
 
@@ -118,7 +118,6 @@ d3.csv("natoSpending.csv", function(error, data) {
     data.forEach(function(d) { d.date = parseDate(d.date); });
 
     var headerNames = d3.keys(data[0]);
-    console.log(headerNames);
 
     var tip = d3.tip()
       .attr('class', 'd3-tip')
@@ -141,7 +140,6 @@ d3.csv("natoSpending.csv", function(error, data) {
         };
 
     }));
-    console.log(spending)
     // add in the scales for each chart
 
     // var maxY = Math.max.apply(Math, d3.values(letters))
@@ -158,9 +156,9 @@ d3.csv("natoSpending.csv", function(error, data) {
          .attr('clip-path', 'url(#clip)')
          .attr("d", function(d) { return area1(d.values); })
          .attr('class', 'focus')
-         .style("fill", function(d) { return colorScale1(d.name); })
-         .on('mouseover', tip.show)
-         .on('mouseout', tip.hide);
+         .style("fill", function(d) { return colorScale1(d.name); });
+         // .on('mouseover', tip.show)
+         // .on('mouseout', tip.hide);
 
     // add in the x axis
     focus.append("g")
@@ -216,21 +214,28 @@ d3.csv("natoSpending.csv", function(error, data) {
     // create objects with region and color
     var colors = d3.entries(create_colors(data))
 
+
+    colorList = colorScale1.domain().reverse().map(function(d){
+      return {'name': d, 'color': colorScale1(d)}
+    });
+
+
+
     // create a legend for color and region
     var legend = svg2.selectAll('.legend')
-                     .data(colors)
+                     .data(colorList)
                      .enter()
                      .append('g')
                      .attr('class', 'legend')
                      .attr('transform', function(d, i) { 
-                        return 'translate(' + (width + margin1.right) + ',' + (i * 20) + ')';
+                        return 'translate(' + (margin1.left + 20) + ',' + (i * 20 + 20) + ')';
                       });
 
     // fill rectangles with colors
     legend.append('rect')
           .attr('height', 15)
           .attr("width", 15)
-          .style('fill', function(d) { return d.value; })
+          .style('fill', function(d) { return d.color; })
           .style('opacity', .95)
           .style('stroke', 'black');
 
@@ -238,7 +243,7 @@ d3.csv("natoSpending.csv", function(error, data) {
     legend.append('text')
           .attr('x', 18)
           .attr('y', 10)
-          .text(function(d) { return d.key; });
+          .text(function(d) { return d.name; });
 
 
 })
