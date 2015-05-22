@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<style>
+
+body {
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  position: relative;
+  width: 960px;
+}
+
+.axis text {
+  font: 12px sans-serif;
+}
+
+.axis path,
+.axis line {
+  fill: none;
+  stroke: #000;
+  shape-rendering: crispEdges;
+}
+
+.bar {
+  fill: blue;
+  fill-opacity: .9;
+}
+
+.x.axis path {
+  display: none;
+}
+
+/*slider formats*/
+.sliderAxis {
+  fill: black;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  user-select: none;
+}
+
+.sliderAxis .halo {
+  stroke: black;
+  stroke-width: 1px;
+  stroke-linecap: round;
+}
+
+.slider .handle path {
+  stroke: black;
+  stroke-width: 3px;
+  stroke-linecap: round;
+  pointer-events: none;
+}
+
+.slider .handle text {
+  fill: black;
+  text-align: center;
+  font-size: 12px;
+}
+/*end slider formats*/
+
+label {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+}
+
+</style>
+<label><input type="checkbox"> Sort values</label>
+<script src="d3.v3.min.js"></script>
+<!-- <script src="slider.js"></script> -->
+<body>
+
+<div id="barChart">
+<div id="slider">
+<button id="recount" onClick="query_textbox()">Count letters</button>
+<script>
+
+// ####################################  BEGIN SLIDER SCRIPT ####################################
+
+  // parameters
+  var sliderMargin = {
+      top: 0,
+      right: 50,
+      bottom: 0,
+      left: 50
+    },
+    sliderWidth = 960 - sliderMargin.left - sliderMargin.right,
+    sliderHeight = 120 - sliderMargin.bottom - sliderMargin.top;
+
+
+  // scale function
+  var timeScale = d3.time.scale()
+    .domain([new Date('1950'), new Date('2014')])
+    .range([0, sliderWidth])
+    .clamp(true);
+
+  // initial value
+  var startValue = timeScale(new Date('1950'));
+  startingValue = new Date('1950');
+
+  //////////
+
+  // defines brush
+  var brush = d3.svg.brush()
+    .x(timeScale)
+    .extent([startingValue, startingValue])
+    .on("brush", brushed);
+
+// ####################################  END OF SLIDER SCRIPT ####################################
+
+var margin = {top: 0, right: 20, bottom: 80, left: 40},
+    width = 960 - margin.left - margin.right,
+    height = 600 - margin.top - margin.bottom - sliderHeight
+
+var formatPercent = d3.format(".0%");
+
+var x = d3.scale.ordinal()
+    .rangeRoundBands([0, width], .1, 1);
+
+var y = d3.scale.linear()
+    .range([height, 0]);
+
+var yearScale = d3.scale.ordinal()
+
+var xAxis = d3.svg.axis()
+    .scale(x)
+    .orient("bottom");
+
+var yAxis = d3.svg.axis()
+    .scale(y)
+    .orient("left")
+    // .tickFormat(formatPercent)
+    ;
+
+var svg2 = d3.select("#slider").append("svg")
+  .attr("width", sliderWidth + sliderMargin.left + sliderMargin.right)
+  .attr("height", sliderHeight + sliderMargin.top + sliderMargin.bottom)
+  .append("g")
+  // classic transform to position g
+  .attr("transform", "translate(" + sliderMargin.left + "," + sliderMargin.top + ")");
+
+var formatDate = d3.time.format("%Y")
+
+  var sliderAxis = svg2.append("g")
+    .attr("class", "sliderAxis")
+    // .attr("class", "x axis")
+  // put in middle of screen
+  .attr("transform", "translate(0," + sliderHeight / 2 + ")")
+  // inroduce axis
+
+
+  sliderAxis.call(d3.svg.axis()
+    .scale(timeScale)
+    .orient("bottom")
+    .tickFormat(function(d) {
+      return formatDate(d);
+    })
+    .tickSize(0)
+    .tickPadding(12)
+    .tickValues([timeScale.domain()[0], timeScale.domain()[1]]))
+    .select(".domain")
+    .select(function() {
+      // console.log(this);
+      return this.parentNode.appendChild(this.cloneNode(true));
+    })
+    .attr("class", "halo");
+
+  var slider = svg2.append("g")
+    .attr("class", "slider")
+    .call(brush);
+
+  slider.selectAll(".extent,.resize")
+    .remove();
+
+  slider.select(".background")
+    .attr("height", sliderHeight);
+
+  var handle = slider.append("g")
+    .attr("class", "handle");
+
+  handle.append("path")
+    .attr("transform", "translate(0," + sliderHeight / 2 + ")")
+    .attr("d", "M 0 -10 V 10")
+
+  handle.append('text')
+    .text(startingValue)
+    .attr("transform", "translate(" + (-18) + " ," + (sliderHeight / 2 - 25) + ")");
+
+  slider
+    .call(brush.event)
+
+value = 0
+
+  function brushed() {
+
+    value = brush.extent()[0];
+
+    if (d3.event.sourceEvent) { // not a programmatic event
+      value = timeScale.invert(d3.mouse(this)[0]);
+      brush.extent([value, value]);
+    }
+
+    handle.attr("transform", "translate(" + timeScale(value) + ",0)");
+    handle.select('text').text(formatDate(value));
+    // console.log(formatDate(value));
+  };
+// ####################################  END SLIDER SCRIPT ####################################
+// ####################################  BEGIN BAR CHART SCRIPT ####################################
+
+
+
+var parseDate = d3.time.format("%Y").parse;
+
+var svg = d3.select("#barChart").append("svg")
+    .attr("width", width + margin.left + margin.right)
+    .attr("height", height + margin.top + margin.bottom)
+    .attr("display", "block")
+    .attr("left-margin", "auto")
+    .attr("right-margin", "auto")
+  .append("g")
+    .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+d3.csv("natoSpending_BY_YEAR.csv", function(error, data) {
+
+  chartYear = formatDate(value);
+
+  // chartYear = d3.entries(document.getElementById("queryString").value))
+
+  years = d3.keys(data[0]).filter(function(key) { return key !== "name"; });
+  yearsDt = years.map(function(d){return parseDate(d);});
+
+  yearScale.range(d3.range(0,years.length,1))
+    .domain(years);
+
+  var spending = years.map(function(year) {
+    return {
+      year: year,
+      values: data.map(function(d) {
+        return {name: d.name, spending: +d[year]};
+      })
+    };
+  });
+
+  console.log(spending[yearScale(chartYear)];
+
+  countries = spending[0].values.map(function(d){return d.name;}).sort();
+
+  x.domain(countries);
+  // y.domain([0, d3.max(spending[yearScale(chartYear)].values, function(d) { return d.spending;})]);
+
+  y.domain([0, d3.max(spending, function(c) { return d3.max(c.values, function(v){ return v.spending; });})]);
+  
+  svg.append("g")
+      .attr("class", "x axis")
+      .attr("transform", "translate(0," + height + ")")
+      .call(xAxis)
+      .selectAll("text")
+        .style("text-anchor", "end")
+        .attr("dx", "-1.2em")
+        .attr("dy", ".15em")
+        .attr("transform", function(d) {return "rotate(-65)" })
+        ;
+
+  svg.append("g")
+      .attr("class", "y axis")
+      .call(yAxis)
+    .append("text")
+      .attr("transform", "rotate(-90)")
+      .attr("y", 6)
+      .attr("dy", ".71em")
+      .style("text-anchor", "end")
+      .text("Defense Spending in Billions of FY11 USD");
+
+  barChart = svg.selectAll(".bar")
+      .data(spending[yearScale(chartYear)].values);
+
+  barChart.enter().append("rect")
+      .attr("class", "bar")
+      // .each(function(d){d3.select(this).call(spending[chartYear].brush)}})
+      .attr("x", function(d){return x(d.name);})
+      .attr("width", x.rangeBand())
+      .attr("y", function(d) { return y(d.spending); })
+      .attr("height", function(d) { return height - y(d.spending); });
+
+  d3.select("input").on("change", change);
+
+  var sortTimeout = setTimeout(function() {
+    d3.select("input").property("checked", true).each(change);
+  }, 2000);
+  // console.log(spending[0]);
+  function change() {
+    clearTimeout(sortTimeout);
+
+    // Copy-on-write since tweens are evaluated after a delay.
+    var x0 = x.domain(spending[yearScale(chartYear)].values.sort(this.checked
+        ? function(a, b) { return b.spending - a.spending; }
+        : function(a, b) { return d3.ascending(a.spending, b.spending); })
+        .map(function(d) { return d.name; }))
+        .copy();
+
+    svg.selectAll(".bar")
+        .sort(function(a, b) { return x0(a.name) - x0(b.name); });
+
+    var transition = svg.transition().duration(750),
+        delay = function(d, i) { return i * 50; };
+
+    transition.selectAll(".bar")
+        .delay(delay)
+        .attr("x", function(d) { return x0(d.name); });
+
+    transition.select(".x.axis")
+        .call(xAxis)
+        .selectAll("text")
+        .style("text-anchor", "end")
+        .attr("dx", "-1.5em")
+        .attr("dy", ".15em")
+        .attr("transform", function(d) {return "rotate(-65)" })
+      .selectAll("g")
+        .delay(delay);
+  }
+});
+</script>
+
+</div>
+</div>
+</body>

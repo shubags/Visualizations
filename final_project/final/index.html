@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<title>Jason Shu's Visualization Final Project</title>
+
+<link href="css/bootstrap.min.css" rel="stylesheet">
+<link href="css/bootstrap-theme.min.css" rel="stylesheet">
+
+<style type="text/css">
+    body {
+        padding-top: 50px;
+        padding-bottom: 20px;
+    }
+
+    .axis text {
+        font-family: sans-serif;
+        font-size: 16px;
+    }
+
+    .brush .extent {
+      stroke: #fff;
+      fill-opacity: .125;
+      shape-rendering: crispEdges;
+    }
+
+
+   .d3-tip {
+      line-height: 1;
+      font-weight: bold;
+      padding: 12px;
+      background: rgba(0, 0, 0, 0.8);
+      color: #fff;
+      border-radius: 2px;
+    }
+
+    /* Creates a small triangle extender for the tooltip */
+    .d3-tip:after {
+      box-sizing: border-box;
+      display: inline;
+      font-size: 10px;
+      width: 100%;
+      line-height: 1;
+      color: rgba(0, 0, 0, 0.8);
+      content: "\25BC";
+      position: absolute;
+      text-align: center;
+    }
+
+    /* Style northward tooltips differently */
+    .d3-tip.n:after {
+      margin: -1px 0 0 0;
+      top: 100%;
+      left: 0;
+    }
+
+    label {
+        position: relative;
+        }
+
+    div svg{
+        margin: 0 auto;
+    }
+
+
+/*    .legend text {
+      fill: #777;
+      font: 10px sans-serif;
+      text-anchor: middle;
+    }
+*/
+    .frame {
+      fill: none;
+      stroke: #aaa;
+    }
+
+    .axis,
+    .frame {
+      shape-rendering: crispEdges;
+    }
+
+    .axis path,
+    .axis line {
+      fill: none;
+      stroke: #000;
+      shape-rendering: crispEdges;
+    }
+
+/*    .x.axis path {
+      display: none;
+    }
+*/
+    .line {
+      fill: none;
+      stroke: steelblue;
+      stroke-width: 1.5px;
+    }
+
+</style>
+
+</head>
+
+<body>
+<script src="d3.v3.min.js"></script>
+<script src="js/jquery.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script src="d3.tip.v0.6.3.js"></script>
+<script src="/js/colorbrewer.js"></script>
+
+<!-- Fixed Navbar -->
+<nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                <span class="sr-only">Toggle Navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#">MSN 622</a>
+        </div>
+
+        <div id="navbar" class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
+                <li><a href="#homework">Homework</a></li>
+                <li><a href="#project">Project</a></li>
+                <li><a href="#participation">Participation</a></li>
+            </ul>
+
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="#about">About</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </div><!--/.nav-collapse -->
+    </div>
+</nav>
+
+<!-- <div class="jumbotron"> -->
+<div style="background-color: #eee">
+    <div class="container">
+        <h1 style="font-size: 32px">Jason Shu's Final Project</h1>
+
+        <h3 style="font-size: 20px">Visualization Prototype</h3>
+        <p style="font-size: 14px">Click <a href="https://github.com/shubags/Visualizations/tree/gh-pages/final_project/prototype">here</a> for source code</p>
+
+    </div>
+</div>
+
+
+
+<div id="myPlot1" style="display: block; margin: auto;"></div>
+<script src="multipleLineTimeSeries.js"></script>
+
+<!-- <div style="height: 10px;"></div>    -->
+
+
+<!-- <div id="myPlot2" style="display: block; margin: auto;"></div>
+<script src="stackedArea.js"></script>
+
+<div style="height: 25px;"></div>   
+ -->
+<!-- <div id="myPlot3" style="display: block; margin-left: auto; margin-right: auto;"></div>
+<script src="brushPlot.js"></script>
+ -->
+<div style="height: 25px;"></div>   
+
+<div class="container">
+<div class="row">
+
+<!-- ADD BUTTONS AND STUFF HERE -->
+
+</div>
+
+<div class="row">
+    <div class="col-md-12">
+        <h2 class="page-header">Description</h2>
+    </div>
+</div>
+
+
+<div class="row">
+    <div class="col-md-6">
+        <div class="media-body">
+          <h4>Dataset Description</h4>
+
+            <p>SIPRI is the Stockholm International Peace Research Institute is the preeminent source for military spending by countries over time. The data source is frequently cited by governments and used by organizations to identify trends in the defense industry. SIPRI's site can be found <a href="http://www.sipri.org/research/armaments/milex/milex_database/milex_database">here</a>.
+
+            <p> The data includes several perspective, but the most prevalent information for my needs is the military expenditures for:
+                <ul>
+                    <li> NATO countries: data is available for the past 65 years</li>
+                    <li> Non-NATO countries: data is available for the past 26 years</li>
+                </ul>
+            </p>
+            <p> This numerical data is shown in terms of constant FY11 U.S. dollars. Future visualizations will incorporate spending as a percentage of GDP.</p>
+
+            <p> A full description of the dataset can be found <a href='https://shubags.github.io/Visualizations/ProjectDataSet/index.html'>
+              here</a>. </p>
+
+        </div>
+    </div>
+
+    <div class="col-md-6">
+        <div class="media-body">
+            <h4> Sketch Summary </h4>
+            <p>
+                This sketch is an implementation of a brushed area chart in d3. The stacked areas represent the spending by each NATO country since the organization's inception in 1949. The purpose of this chart is to show how the United States has spent the lion's share on defense over this entire period. This is somewhat misleading in that the U.S. also has the largest GDP compared to other NATO countries (typically by an order of magnitude).
+            </p>
+            <p>
+                Because there are so many countries, I did not include a legend. Instead, I am in the process of implementing a tooltip that will allow the user to see what the defense spending was in any given year. This feature is still in work. I also allowed for brushing so that users could focus on a certain period of time.
+            </p>
+            <p>
+              There is a lie factor that I am looking to address since many NATO countries joined during the 65 years after the organization's inception. Therefore, growth isn't just a function of increased spending, but also the inclusion of more countries' budgets in the total.
+
+              I hope to resolve this by allowing the tooltip to show countries that were added each year when the user hovers over the whitespace above the area chart.
+            </p>
+        </div>
+    </div>
+
+</div>
+
+<hr/>
+
+<footer>
+    <p style="text-align: center;">Jason Shu &bullet; MSAN 622 Information Visualization &bullet; Spring 2015</p>
+</footer>
+
+</div><!--/.container -->
+
+</body>
+</html>

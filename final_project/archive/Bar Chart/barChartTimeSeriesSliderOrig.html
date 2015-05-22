@@ -213,7 +213,7 @@ var svg = d3.select("#barChart").append("svg")
 
 d3.csv("natoSpending_BY_YEAR.csv", function(error, data) {
 
-  chartYear = 1980;
+  chartYear = 1975;
 
   
   years = d3.keys(data[0]).filter(function(key) { return key !== "name"; });
