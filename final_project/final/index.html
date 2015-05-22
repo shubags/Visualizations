@@ -563,15 +563,31 @@ makeBarChart(1950)
       With Plot 2, I had hoped to update the plot automatically (with bar height transitions) as the slider bar was moved. This would be a fun interaction for the user and would allow the user to see how the countries' altered their spending over time. This was to augment the stacked area plot because stacked area plots do not allow users to easily detect changes for any data group except for the bottom one (the one touching the x-axis). Unfortunately, the way that I constructed my plots, the slider bar required manual updating of the data. So while the slider bar is fun, the requirement to hit the "update spending" button prevents the user from gaining true insight in the data.
     </p>
     <p>
-      Lastly, I had intended to....
+      Regarding methods I had previously considered or intended to implement, several obstacles arose. The parallel coordinates plot that I had planned for had several issues with skewed data. Much like Plot 2 where the United States dominates, the parallel coordiantes plot was made less interesting due to the size of the United States. I could have normalized countries with metrics using "% of GDP" or "per capita" as the factors, but the data I had collected did not yield any interesting trends to justify the complexity of this type of plot.
     </p>
+    <p>
+      I had also intended on the "health and wealth" plot made famous by Hans Rosling. This was supposed to be the "crown jewel" of the analysis, and early indicators were very promising. However, the metrics used to indicate public sentiment were driven by surveys, and surveys are inherently difficult to perform. As a result, there were not consistent results for all countries over the years. In fact, the majority of countries did not have data in any given period of time. In order to overcome this, I developed an algorithm to compute the correlation of countries for years that <em> did</em> have data, and I used those correlations to compute weighted averages to measure "probable" trends.
+    </p>
+    <p>
+      When I finished the analysis, I had static plots that told the story I wanted to, but this was based on a very small number of data points. The majority of imputed data was done so on correlations built from several years back. As a result, the decreasing trend of a few countries yielded a decreasing trend for almost all countries. And while this supported the story I was trying to tell - which was that countries' citizens are growing increasingly disinterested in their nations' defenses - the supporting data was suspect at best. So while the visualization would be impactful and interesting, I felt it was dishonest at the same time. Therefore, I reluctantly withheld this plot from my results.
+    </p>
+
 </div>
 
 <div>
   <h4>Conclusion</h4>
     <p>
-      This data set is very familiar to me, and I have analyzed it in fairly simple ways in Excel. I tend to 
+      The aftermath of Operation Enduring Freedom (OEF) and Operation Iraqi Freedom (OIF) meant that the domestic market was shrinking. As Country Manager within Boeing's International Business Development group, I was constantly asked to identify and evaluate business opportunities outside of the United States. This was a consistent theme across all U.S. defense contractors.
     </p>
+    <p>
+      The irony was that all firms in Europe were clamoring to gain footholds in the United States because the European markets were so small. Nevertheless, given a mandate to find new business, Europe was a logical place to explore. My CEO famously said during a meeting, "the European market is dead." Everybody assumed that spending was on the decline, but looking at the absolute numbers shown in Plot 1 (minus the U.S.) indicated a small, but steady growth. It caused me to think about why everybody immediately jumped to the conclusion that European spending was on the decline.
+    </p>
+    <p>
+      The key takeaway from this is that, while absolute spending has been increasing ever-so-slightly in absolute terms, the outlook does in fact remain bleak. I very much wish to continue to look for alternative means to measure citizens' opinions about defense spending. This will remain the key data item that will support my point about why countries continue to deemphasize defense spending.
+    </p>
+  <p>
+
+</p>
 
 </div>
 
