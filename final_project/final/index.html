@@ -492,33 +492,64 @@ makeBarChart(1950)
 </div>
 
 <div class="col-md-12">
-    <h2 class="page-header">Description</h2>
+    <h2 class="page-header">Discussion</h2>
 </div>
 
 
 
 <div>
-  <h4>Techniques</h4>
+  <h3>Techniques</h4>
 
     <p>
+      The three plots that were created were done to demonstrate time series nature of this data. There are many stories meant to be shown by the plots shown. The following is a description of why each plot type was chosen.
     </p>
-
+    
+    <h5>Plot 1 - The Brushed Area Plot</h2>
+    <p>
+      One of the stories that I wished to tell was about the global increase in defense spending over time. The defense industry uses these trends to pursue new business. By showing the stacked area plot, one can see how important the United States is to the defense industry as a whole. By itself, the United States more than doubles the spend rate of all other NATO countries combined.
+    </p>
+    <p>
+      The drop off after the United States is significant, and after the top 8, the numbers get too small to see individually on a graph. These 19 countries collectively spend less than the #2 spender in the world, France. As a result, these countries were grouped together in an "Other" bucket to prevent users from attempting to read each individual country.
+    </p>
+    <h5>Plot 2 - The Sortable Bar Chart</h2>
+    <p>
+      After recognizing overall growth and the United States' dominance in spending, the next question to be answered is, who <em>were</em> the biggest contributers to NATO spending over time? The sortable bar chart allows users to use a slider to select a point in time where they can compare countries' spending. The purpose of this chart is not to know exactly how much each country has spent, but rather to see where they rank compared to the rest of NATO.
+    </p>
+    <p>
+      One key challenge with this plot is that the United States spends so much more than the other countries that the other bars become indistinguishable. Additionally, the y-axis is scaled to handle the largest value during the period of time of the analysis. This means that during the early years of NATO, when spending was signfiicantly less than during the 2000s, the y-axis seems unnecessarily small. I attempted to re-scale the axis as time passed, but I felt this would introduce significant lie factor.
+    </p>
+    <h5>Plot 3 - The Multiple-Line Graph</h5>
+    <p>
+      The overall spending of countries is interesting, but it is misleading because wealthier countries are by nature going to spend more than poorer ones. A common measurement for guaging how important defense spending is to a nation is to measure defense spending as a percentage of GDP.
+    </p>
+    <p>
+      At its inception, NATO guidelines recommended that each member nation spend 2% of its GDP on defense. This level of spending was a threshold deemed indicative of a country's commitment to the alliance. The purpose of the line graph was to show the overall decreasing trend of spending as a percentage of GDP. This type of plot, while a messy, provides a good picture into reduced spending, en masse, over the years.
+    </p>
+    <h5>Overall</h5>
+    <p>
+      The plots shown can help tell a story, but there is a bit of lie factor involved with the data. Most noteably, the not all member nations joined at the organization's inception in April 1949. Overall increases seen in Plot 1 are partly due to adding new countries to the plot after they joined. This could be perceived as lie factor and artificial growth.
+    </p>
+    <p>
+      However, the intent of these plots was to show who the most significant contributers were to <em> the organization </em>, not countries overall. To include their spending during years countries were not actually in the organization would introduce a different type of lie factor. Ultimately, I chose the lesser of evils regarding lie factor.
+    </p>
 </div>
 
 
 <div>
   <h4>Interactivity</h4>
-
     <p>
+
     </p>
 
 </div>
 
 <div>
   <h4>Feedback</h4>
-
     <p>
+      The key feedback received regarding the project prototype was regarding the inclusion of all 26 countries in the stacked area chart. While it is more "exactly" correct to include all of the countries, the point was to show overall growth and that the United States was the dominant spender. As a result, I aggragated the smallest 19 countries into an "other" category.
     </p>
+    <p>
+      It was also pointed out to me that there were too many digits in the y-axis. I had originally measured spending in millions of US Dollars, in part because several countries had significantly less than $1 billion in spending per year. As a result, I had tried to ensure everybody had values over 1 by reducing the unit size. This, however, caused significant clutter on the plot, and switching to billions as the unit of measurement improved clarity.
 
 </div>
 
@@ -526,14 +557,20 @@ makeBarChart(1950)
   <h4>Challenges</h4>
 
     <p>
+      There were singificant challenges encountered throughout this effort. With Plot 1, I had intended to incorporate a tool tip to allow users to see how much spending each country (or group of countries) was spending each year. Ultimately, I was unable to get the tooltip to show up properly.
     </p>
-
+    <p>
+      With Plot 2, I had hoped to update the plot automatically (with bar height transitions) as the slider bar was moved. This would be a fun interaction for the user and would allow the user to see how the countries' altered their spending over time. This was to augment the stacked area plot because stacked area plots do not allow users to easily detect changes for any data group except for the bottom one (the one touching the x-axis). Unfortunately, the way that I constructed my plots, the slider bar required manual updating of the data. So while the slider bar is fun, the requirement to hit the "update spending" button prevents the user from gaining true insight in the data.
+    </p>
+    <p>
+      Lastly, I had intended to....
+    </p>
 </div>
 
 <div>
   <h4>Conclusion</h4>
-
     <p>
+      This data set is very familiar to me, and I have analyzed it in fairly simple ways in Excel. I tend to 
     </p>
 
 </div>
