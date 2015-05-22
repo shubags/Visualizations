@@ -54,7 +54,7 @@ var tip = d3.tip()
   .html(function(d) {
     return "<strong>Year: </strong> <span style='color:white'>" + d.date + "</span><br>" +
            "<strong>Country: </strong> <span style='color:white'>" + d.name + "</span><br>" + 
-           "<strong>Spending: </strong> <span style='color:white'>" +d.spend * 100 + "%</span>"
+           "<strong>Spending: </strong> <span style='color:white'>" + (+d.spend * 100).toFixed(2) + "%</span>"
             ;
   })
 
